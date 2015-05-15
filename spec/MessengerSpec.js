@@ -9,7 +9,7 @@
 var msg    = require('../index');
 var expect = require('chai').expect;
 
-describe("Console Module", function() {
+describe("Messenger Library", function() {
 
 	it("should test all message routines", function(done) {
 		// msg.Log('log');
