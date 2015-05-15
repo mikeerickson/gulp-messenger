@@ -25,11 +25,12 @@ var warning = chalk.magenta;
 // TODO: Add support for passing options
 
 var defOptions = {
-    logToFile: true,
-    logPath:   'logs/',
-    logFile:   'app.log',
-    timestamp: false,
-    rotateLog: true
+    logToFile:     true,
+    logPath:       'logs/',
+    logFile:       'app.log',
+    timestamp:     false,
+    rotateLog:     true,
+    boldVariables: true
 };
 
 
@@ -43,6 +44,7 @@ var logger = new (winston.Logger)({
     ],
     level: 'debug'
   });
+
 
 // create directory for log files in case it has been deleted
 mkdirp(defOptions.logPath);
@@ -85,6 +87,14 @@ function notify(style, before, message, after, data) {
             text     = chalk.gray;
             variable = chalk.white;
             break;
+    }
+
+    // if we dont have bold variables (for merging), set variable to text color
+    if( ! defOptions ) {
+        variable = text;
+        if ( text === chalk.gray ) {
+            variable = chalk.white
+        }
     }
 
     for (var i = 0; i < tokens.length; i++) {
