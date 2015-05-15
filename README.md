@@ -99,4 +99,15 @@ msg.Info('Enviroment: <%= env.NODE_ENV %>. Name: <%= name %>', {foo: 'codedungeo
 Copyright (c) 2015 Mike Erickson
 Released under the MIT license
 
+
+## Credits
+
+gulp-messenger written by Mike Erickson
+
+E-Mail: [codedungeon@gmail.com](mailto:codedungeon@gmail.com)
+
+Twitter: [@codedungeon](http://twitter.com/codedungeon)
+
+Webiste: [codedungeon.org](http://codedungeon.org)
+
 ***
