@@ -22,6 +22,7 @@ var warning = chalk.magenta;
 // SETUP DEFUAL OPTIONS
 // =============================================================================
 // TODO: Make time output an option (perhaps set as default paramters when loaded)
+// TODO: Add support for passing options
 
 var defOptions = {
     logToFile: true,
