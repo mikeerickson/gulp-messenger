@@ -22,12 +22,14 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "chai": "^2.3.0",
     "chalk": "^1.0.0",
     "gulp-util": "^3.0.0",
     "lodash": "^3.0.0",
     "lodash-deep": "^1.6.0",
     "pretty-hrtime": "^1.0.0",
-    "through2": "^0.6.3"
+    "through2": "^0.6.3",
+    "winston": "^1.0.0"
   },
   "engines": {
     "node": ">= 0.10"
@@ -37,7 +39,15 @@
   },
   "homepage": "https://github.com/mikeerickson/gulp-messenger",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "chalk": "^1.0.0",
+    "lodash": "^3.0.0",
+    "lodash-deep": "^1.6.0",
+    "mkdirp": "^0.5.1",
+    "pretty-hrtime": "^1.0.0",
+    "through2": "^0.6.3",
+    "winston": "^1.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
