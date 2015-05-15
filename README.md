@@ -5,7 +5,7 @@
 ## Install with [npm](npmjs.org)
 
 ```sh
-npm install gulp-msg
+npm install gulp-messenger
 ```
 
 ## Usage
@@ -22,7 +22,6 @@ msg.Note   ('style: <%= name %>', {name: 'note'});
 msg.Time   ('style: <%= name %>', {name: 'time'});
 ```
 
-![screenshot](https://github.com/tamtakoe/gulp-msg/raw/master/example.png)
 
 ## API
 #### info, success, warning, error, note, time
