@@ -13,6 +13,12 @@ npm install gulp-messenger
 ```js
 var msg = require('gulp-messenger');
 
+msg.init(); // initialize module, otherwise defaults will be used
+
+// this example will enable file logging
+msg.init({logToFile: true});
+
+
 msg.Info('-', 'Loading...', '*');
 msg.Info   ('style: <%= name %>', {name: 'info'});
 msg.Success('style: <%= name %>', {name: 'success'});
@@ -25,12 +31,33 @@ msg.Debug  ('style: <%= name %>', {name: 'debug'});
 
 
 ## API
-#### info, success, warning, error, note, time
+#### info/Info, success/Success, warning/Warning, error/Error, note/Note, time/Time, debug/Debug
+
+- lowercase methods are to bue used in gulp pipeline
+- Titlecase methods are to be used outside of gulp (ie node or browser)
+
+Default Options (supplied to `init` method)
+
+```js
+var defOptions = {
+    logToFile:     false,
+    logPath:       'logs/',
+    logFile:       'app.log',
+    timestamp:     false,
+    rotateLog:     false,
+    boldVariables: true
+};
+```
 
 For example `info`
 Use `msg.info` for each file into the stream
 
 ```js
+
+msg.Info('This information message logged to console and optionally log');
+
+or -
+
 gulp.src('src/**/*')
     .pipe(msg.info('Piping Message')); //'Piping Message' for each file
 ```
@@ -48,7 +75,7 @@ Use `msg.Info` from the outside of the stream
 msg.Info('Application Message'); //'Application Message' in node.js application
 ```
 
-### msg.info([before,] message, [after,] [data])
+### msg.Info([before,] message, [after,] [data])
 
 Show message
 

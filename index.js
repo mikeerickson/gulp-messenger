@@ -27,7 +27,7 @@ var warning = chalk.magenta;
 // TODO: Add support for passing options
 
 var defOptions = {
-    logToFile:     true,
+    logToFile:     false,
     logPath:       'logs/',
     logFile:       'app.log',
     timestamp:     false,
