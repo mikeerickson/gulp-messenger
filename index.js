@@ -4,6 +4,8 @@ var prettyHrtime = require('pretty-hrtime');
 var chalk        = require('chalk');
 var winston      = require('winston');
 var mkdirp       = require('mkdirp');
+var defaults     = require('defaults');
+
 var _            = require('lodash');
 
 _.mixin(require('lodash-deep'));
@@ -29,25 +31,16 @@ var defOptions = {
     logPath:       'logs/',
     logFile:       'app.log',
     timestamp:     false,
-    rotateLog:     true,
+    rotateLog:     false,
     boldVariables: true
 };
 
-
 // SETUP WINSTON
 // =============================================================================
-var logger = new (winston.Logger)({
-    transports: [
-      // new (winston.transports.Console)(),
-      // new (winston.transports.File)({ filename: defOptions.logPath + defOptions.logFile }),
-      new (winston.transports.DailyRotateFile)({ filename: defOptions.logPath + defOptions.logFile })
-    ],
-    level: 'debug'
-  });
+// Initialize logger, additional settings will be created in `init` method
 
+var logger = new (winston.Logger)({ level: 'debug'});
 
-// create directory for log files in case it has been deleted
-mkdirp(defOptions.logPath);
 
 function notify(style, before, message, after, data) {
     var text, variable;
@@ -90,13 +83,14 @@ function notify(style, before, message, after, data) {
     }
 
     // if we dont have bold variables (for merging), set variable to text color
-    if( ! defOptions ) {
+    if( ! defOptions.boldVariables ) {
         variable = text;
         if ( text === chalk.gray ) {
             variable = chalk.white
         }
     }
 
+    // interpolate string
     for (var i = 0; i < tokens.length; i++) {
         if (i%2) {
             result += variable(_.deepGet(data, tokens[i]) || '');
@@ -213,19 +207,44 @@ function msg(style, useFlush) {
     };
 }
 
+function init(options) {
+
+    return function(options) {
+
+        if ( typeof options !== 'undefined') {
+            defOptions = defaults(options, defOptions);
+        }
+
+        if(defOptions.logPath[defOptions.logPath.length] !== '/') {
+            defOptions.logPath += '/';
+        }
+
+        defOptions.logFilename = defOptions.logPath + defOptions.logFile;
+        if ( defOptions.rotateLog ) {
+            logger.add(winston.transports.DailyRotateFile,{filename: defOptions.logFilename});
+        } else {
+            logger.add(winston.transports.File,{filename: defOptions.logFilename});
+        }
+
+        mkdirp(defOptions.logPath);
+        defOptions.logInitialized = true;
+    }
+}
+
 function Msg(style) {
     return function() {
         var args = getArgs(arguments);
-
         notify(style, args.before, args.message, args.after, args.data);
     };
 }
 
 
 module.exports = {
+    init:    init(),
     info:    msg('info'),
     success: msg('success'),
     warning: msg('warning'),
+    warn:    msg('warning'),
     error:   msg('error'),
     note:    msg('note'),
     time:    msg('time'),
@@ -234,6 +253,7 @@ module.exports = {
         info:    msg('info', true),
         success: msg('success', true),
         warning: msg('warning', true),
+        warn:    msg('warning', true),
         error:   msg('error', true),
         note:    msg('note', true),
         time:    msg('time', true),
@@ -242,6 +262,7 @@ module.exports = {
     Info:    Msg('info'),
     Success: Msg('success'),
     Warning: Msg('warning'),
+    Warn:    Msg('warning'),
     Error:   Msg('error'),
     Note:    Msg('note'),
     Time:    Msg('time'),

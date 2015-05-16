@@ -9,20 +9,43 @@
 var msg    = require('../index');
 var expect = require('chai').expect;
 
-describe("Messenger Library", function() {
+// msg.init(); default
+// initialize plugin option override
+msg.init({
+		logToFile: true,
+		rotateLog: false,
+		logPath: 'logs',
+		logFile: 'myLog.log'}
+	);
 
-	it("should test all message routines", function(done) {
+describe("Messenger Module for Browser and Server, including `gulp` pipeline support", function() {
+
+	it("should test all messenger routines", function(done) {
 		// msg.Log('log');
 		msg.Info('info');
 		msg.Error('error');
 		msg.Success('success');
 		msg.Warning('warning');
+		msg.Warn("using `warn` shorthand");
 		msg.Note('note');
 		msg.Time('time');
 		msg.Debug('debug');
+		msg.Info('*','Bordered Output','=');
+		msg.Warning('Testing interpolation by <%= fname %> <%= lname %>',{fname: 'Mike', lname: 'Erickson'});
 		expect(true).to.be.equal(true);
 
 		done();
 	});
+
+	it('should test all logging routines',function(done){
+		expect(true).to.be.equal(true);
+		done();
+	});
+
+	if('should test `gulp` methods', function(done){
+		expect(true).to.be.equal(true);
+		done();
+	});
+
 
 });
