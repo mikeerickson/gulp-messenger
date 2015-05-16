@@ -42,7 +42,7 @@ describe("Messenger Module for Browser and Server, including `gulp` pipeline sup
 		done();
 	});
 
-	if('should test `gulp` methods', function(done){
+	it('should test `gulp` methods', function(done){
 		expect(true).to.be.equal(true);
 		done();
 	});

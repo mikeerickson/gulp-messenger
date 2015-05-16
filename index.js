@@ -1,3 +1,5 @@
+'use strict';
+
 var path         = require("path");
 var through      = require('through2');
 var prettyHrtime = require('pretty-hrtime');
@@ -11,14 +13,6 @@ var _            = require('lodash');
 _.mixin(require('lodash-deep'));
 
 var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
-
-
-// create some helper variables
-var debug   = chalk.grey.dim;
-var error   = chalk.red;
-var success = chalk.green;
-var info    = chalk.blue;
-var warning = chalk.magenta;
 
 
 // SETUP DEFUAL OPTIONS
@@ -86,7 +80,7 @@ function notify(style, before, message, after, data) {
     if( ! defOptions.boldVariables ) {
         variable = text;
         if ( text === chalk.gray ) {
-            variable = chalk.white
+            variable = chalk.white;
         }
     }
 
@@ -113,25 +107,25 @@ function notify(style, before, message, after, data) {
     function logToFile(style, result) {
         switch (style) {
             case 'error':
-              (defOptions.logToFile) ? logger.error(result) : '';
+              if (defOptions.logToFile) { logger.error(result); }
               break;
            case 'warning':
-              (defOptions.logToFile) ? logger.warn(result) : '';
+              if (defOptions.logToFile) { logger.warn(result); }
               break;
            case 'info':
-              defOptions.logToFile ? logger.info(result) : '';
+              if (defOptions.logToFile) { logger.info(result); }
               break;
            case 'success':
-              defOptions.logToFile ? logger.info(result) : '';
+              if (defOptions.logToFile) { logger.info(result); }
               break;
            case 'time':
-              defOptions.logToFile ? logger.info(result) : '';
+              if (defOptions.logToFile) { logger.info(result); }
               break;
           case 'debug':
-              defOptions.logToFile ? logger.log('debug', result) : '';
+              if (defOptions.logToFile) { logger.log('debug', result); }
               break;
           case 'default':
-              defOptions.logToFile ? logger.info(result) : '';
+              if (defOptions.logToFile) { logger.info(result); }
               break;
         }
     }
@@ -177,7 +171,7 @@ function msg(style, useFlush) {
         var lastFile = {};
         var start    = process.hrtime();
 
-        function transform(file, enc, callback) {
+        function transform(file, callback) {
             lastFile = file;
 
             if (!useFlush) {
@@ -207,7 +201,7 @@ function msg(style, useFlush) {
     };
 }
 
-function init(options) {
+function init() {
 
     return function(options) {
 
@@ -228,7 +222,7 @@ function init(options) {
 
         mkdirp(defOptions.logPath);
         defOptions.logInitialized = true;
-    }
+    };
 }
 
 function Msg(style) {
@@ -259,12 +253,12 @@ module.exports = {
         time:    msg('time', true),
         debug:   msg('debug', true)
     },
-    Info:    Msg('info'),
-    Success: Msg('success'),
-    Warning: Msg('warning'),
-    Warn:    Msg('warning'),
-    Error:   Msg('error'),
-    Note:    Msg('note'),
-    Time:    Msg('time'),
-    Debug:   Msg('debug')
+    Info:    new Msg('info'),
+    Success: new Msg('success'),
+    Warning: new Msg('warning'),
+    Warn:    new Msg('warning'),
+    Error:   new Msg('error'),
+    Note:    new Msg('note'),
+    Time:    new Msg('time'),
+    Debug:   new Msg('debug')
 };
