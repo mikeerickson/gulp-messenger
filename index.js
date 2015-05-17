@@ -102,7 +102,8 @@ function notify(style, before, message, after, data) {
         for (var i = 0; i < 80; i++) {
             result += line;
         }
-        console.log(text(result));
+
+        if ( defOptions.logToConsole ) { console.log(text(result)); }
     }
 
     function logToFile(style, result) {

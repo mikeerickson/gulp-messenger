@@ -12,11 +12,12 @@ var expect = require('chai').expect;
 // msg.init(); default
 // initialize plugin option override
 msg.init({
-		logToFile: true,
-		rotateLog: false,
-		logPath: 'logs',
-		logFile: 'myLog.log'}
-	);
+		logToFile:     true,
+		logToConsole:  true,
+		rotateLog:     false,
+		logPath:       'logs',
+		logFile:       'myLog.log'
+	});
 
 describe("Messenger Module for Browser and Server, including `gulp` pipeline support", function() {
 
