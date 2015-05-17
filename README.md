@@ -1,16 +1,14 @@
-# gulp-messenger 
-## Version: 0.0.14
-
+# gulp-messenger
 
 > gulp plugin for command line notification
 
-## Install with [npm](npmjs.org)
+### Install with [npm](npmjs.org)
 
 ```sh
 npm install gulp-messenger
 ```
 
-## Usage
+### Usage
 
 ```js
 var msg = require('gulp-messenger');
@@ -37,7 +35,7 @@ msg.Debug  ('style: <%= name %>', {name: 'debug'});
 ```
 
 
-## API
+### API
 #### info/Info, success/Success, warning/Warning, error/Error, note/Note, time/Time, debug/Debug
 
 - lowercase methods are to bue used in gulp pipeline
