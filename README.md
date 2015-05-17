@@ -127,13 +127,13 @@ msg.Info('Enviroment: <%= env.NODE_ENV %>. Name: <%= name %>', {foo: 'codedungeo
 ```
 
 
-## License
+### License
 
 Copyright (c) 2015 Mike Erickson
 Released under the MIT license
 
 
-## Credits
+### Credits
 
 gulp-messenger written by Mike Erickson
 
