@@ -22,6 +22,7 @@ var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
 
 var defOptions = {
     logToFile:     false,
+    logToConsole:  true,
     logPath:       'logs/',
     logFile:       'app.log',
     timestamp:     false,
@@ -131,7 +132,8 @@ function notify(style, before, message, after, data) {
     }
 
     setLine(before);
-    console.log(result);
+    if ( defOptions.logToConsole ) { console.log(result); }
+
     setLine(after);
     logToFile(style, result);
 
@@ -220,7 +222,9 @@ function init() {
             logger.add(winston.transports.File,{filename: defOptions.logFilename});
         }
 
-        mkdirp(defOptions.logPath);
+        if(defOptions.logToFile) {
+            mkdirp(defOptions.logPath);
+        }
         defOptions.logInitialized = true;
     };
 }

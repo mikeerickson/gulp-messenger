@@ -3,3 +3,8 @@
 /.settings
 /logs
 npm-debug.log
+/tasks
+gulpfile.js
+config.js
+/tasks/config
+/spec/logs
