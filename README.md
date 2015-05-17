@@ -1,4 +1,6 @@
 # gulp-messenger 
+## Version: 0.0.14
+
 
 > gulp plugin for command line notification
 
@@ -17,6 +19,11 @@ msg.init(); // initialize module, otherwise defaults will be used
 
 // this example will enable file logging
 msg.init({logToFile: true});
+
+
+// this will disable logging to file and interpolation variables will be font style as message (no bold)
+var options = { logToFile: false, boldVariables: false };
+msg.init(options);
 
 
 msg.Info('-', 'Loading...', '*');
@@ -41,6 +48,7 @@ Default Options (supplied to `init` method)
 ```js
 var defOptions = {
     logToFile:     false,
+    logToConsole:  true,
     logPath:       'logs/',
     logFile:       'app.log',
     timestamp:     false,
