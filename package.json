@@ -1,7 +1,7 @@
 {
   "name": "gulp-messenger",
   "description": "Console and File Logger",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "repository": {
     "type": "git",
     "url": "https://github.com/mikeerickson/gulp-messenger"
@@ -41,6 +41,7 @@
   "homepage": "https://github.com/mikeerickson/gulp-messenger",
   "main": "index.js",
   "devDependencies": {
+    "chai": "^2.3.0",
     "chalk": "^1.0.0",
     "lodash": "^3.0.0",
     "lodash-deep": "^1.6.0",
