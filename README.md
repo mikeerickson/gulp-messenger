@@ -1,8 +1,10 @@
 # gulp-messenger
+### gulp plugin for browser, command line notification and logging!
 
-[![Build Status](https://travis-ci.org/mikeerickson/gulp-messenger.svg?branch=master)](https://travis-ci.org/mikeerickson/gulp-messenger)
+[![Build Status](https://travis-ci.org/mikeerickson/gulp-messenger.svg?branch=master)](https://travis-ci.org/mikeerickson/gulp-messenger) [![Dependency Status](https://gemnasium.com/mikeerickson/gulp-messenger.svg)](https://gemnasium.com/mikeerickson/gulp-messenger) [![npm](https://img.shields.io/npm/dm/localeval.svg)]() [![npm](https://img.shields.io/badge/mocha-passed-green.svg)]()
 
-> gulp plugin for command line notification
+
+
 
 ### Install with [npm](npmjs.org)
 
@@ -17,7 +19,7 @@ var msg = require('gulp-messenger');
 
 msg.init(); // initialize module, otherwise defaults will be used
 
-// this example will enable file logging
+// this example will enable file logging (see options below)
 msg.init({logToFile: true});
 
 
