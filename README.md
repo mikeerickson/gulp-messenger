@@ -1,5 +1,7 @@
 # gulp-messenger
 
+[![Build Status](https://travis-ci.org/mikeerickson/gulp-messenger.svg?branch=master)](https://travis-ci.org/mikeerickson/gulp-messenger)
+
 > gulp plugin for command line notification
 
 ### Install with [npm](npmjs.org)
