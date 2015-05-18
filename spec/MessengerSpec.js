@@ -19,7 +19,7 @@ msg.init({
 		logFile:       'myLog.log'
 	});
 
-describe("Messenger Module for Browser and Server, including `gulp` pipeline support", function() {
+describe("Messenger (Console / Logger) for Browser and Server, including `gulp` pipeline support", function() {
 
 	it("should test all messenger routines", function(done) {
 		// msg.Log('log');
