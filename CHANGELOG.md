@@ -6,6 +6,8 @@
 
 ## Changelog
 
+- 0.0.23 Small Fixes
+
 - 0.0.22 Test Refactoring
     - Refactored tests 
 
