@@ -6,8 +6,9 @@
 
 ## Changelog
 
-- 0.0.23 Small Fixes
-
+- 0.0.24 Small Fixes
+    - fixed issue when supplied message is an 'object' causing an error when parsing tokens
+    
 - 0.0.22 Test Refactoring
     - Refactored tests 
 
