@@ -39,6 +39,9 @@ var logger = new (winston.Logger)({ level: 'debug'});
 
 function notify(style, before, message, after, data) {
     var text, variable;
+    if ( typeof message === 'object')
+        message = message.toString();
+
     var tokens = message.split(VALUE_REGEXP);
     var result = '';
 
