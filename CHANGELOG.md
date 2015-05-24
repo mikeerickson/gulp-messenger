@@ -6,6 +6,9 @@
 
 ## Changelog
 
+- 0.0.28 Bug Fixes
+    - Fixed issue with `timestamp` option not properlly including timestamp
+
 - 0.0.27 Bug Fix
     - Fixed a regression issue when using messenger commands in gulp pipeline
     

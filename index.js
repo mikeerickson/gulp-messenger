@@ -5,6 +5,7 @@ var chalk        = require('chalk');
 var winston      = require('winston');
 var mkdirp       = require('mkdirp');
 var defaults     = require('defaults');
+var moment       = require('moment');
 
 var _            = require('lodash');
 
@@ -135,10 +136,30 @@ function notify(style, before, message, after, data) {
 	}
 
 	setLine(before);
-	if ( defOptions.logToConsole ) { console.log(result); }
+	// need to get time here and output if option enabled
+
+	if ( defOptions.logToConsole ) {
+		if ( defOptions.timestamp ) {
+			if ( result )
+				console.log(chalk.grey.dim('[' + moment().format('h:mm:ss') + '] ') + result);
+		} else {
+			console.log(result);
+		}
+	}
 	setLine(after);
 	logToFile(style, result);
 
+}
+
+function currentTime() {
+	var currentdate = new Date();
+	var currentTime = '['
+		+ currentdate.getHours() + ":"
+		+ currentdate.getMinutes() + ":"
+		+ currentdate.getSeconds()
+		+ ']';
+
+	return currentTime;
 }
 
 function getArgs(args) {
