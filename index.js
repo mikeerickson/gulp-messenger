@@ -81,12 +81,12 @@ function notify(style, before, message, after, data) {
 	if( ! defOptions.boldVariables ) {
 		variable = text;
 		if ( text === chalk.gray ) {
-			variable = chalk.white
+			variable = chalk.white;
 		}
 	}
 
 	// interpolate string
-	if ( typeof tokens == 'object') {
+	if ( typeof tokens === 'object') {
 		result = text(tokens);
 	} else {
 		for (var i = 0; i < tokens.length; i++) {
@@ -102,7 +102,6 @@ function notify(style, before, message, after, data) {
 		if (!line) { return; }
 
 		var result = '';
-
 		for (var i = 0; i < 80; i++) {
 			result += line;
 		}
@@ -140,8 +139,9 @@ function notify(style, before, message, after, data) {
 
 	if ( defOptions.logToConsole ) {
 		if ( defOptions.timestamp ) {
-			if ( result )
+			if ( result ) {
 				console.log(chalk.grey.dim('[' + moment().format('h:mm:ss') + '] ') + result);
+			}
 		} else {
 			console.log(result);
 		}
@@ -149,17 +149,6 @@ function notify(style, before, message, after, data) {
 	setLine(after);
 	logToFile(style, result);
 
-}
-
-function currentTime() {
-	var currentdate = new Date();
-	var currentTime = '['
-		+ currentdate.getHours() + ":"
-		+ currentdate.getMinutes() + ":"
-		+ currentdate.getSeconds()
-		+ ']';
-
-	return currentTime;
 }
 
 function getArgs(args) {
