@@ -6,6 +6,9 @@
 
 ## Changelog
 
+- 0.0.27 Bug Fix
+    - Fixed a regression issue when using messenger commands in gulp pipeline
+    
 - 0.0.24 Small Fixes
     - fixed issue when supplied message is an 'object' causing an error when parsing tokens
     

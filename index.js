@@ -1,5 +1,3 @@
-'use strict';
-
 var path         = require("path");
 var through      = require('through2');
 var prettyHrtime = require('pretty-hrtime');
@@ -39,14 +37,10 @@ var logger = new (winston.Logger)({ level: 'debug'});
 
 function notify(style, before, message, after, data) {
 	var text, variable;
-	var tokens = [];
 	var result = '';
+	var tokens;
 
-	if ( typeof message !== 'object')
-		tokens = message.split(VALUE_REGEXP);
-	else
-		tokens = message;
-
+	tokens = ( typeof message !== 'object') ? message.split(VALUE_REGEXP) : tokens = message;
 	switch (style) {
 		case "info":
 			text     = chalk.cyan;
@@ -86,7 +80,7 @@ function notify(style, before, message, after, data) {
 	if( ! defOptions.boldVariables ) {
 		variable = text;
 		if ( text === chalk.gray ) {
-			variable = chalk.white;
+			variable = chalk.white
 		}
 	}
 
@@ -111,32 +105,31 @@ function notify(style, before, message, after, data) {
 		for (var i = 0; i < 80; i++) {
 			result += line;
 		}
-
 		if ( defOptions.logToConsole ) { console.log(text(result)); }
 	}
 
 	function logToFile(style, result) {
 		switch (style) {
 			case 'error':
-				if (defOptions.logToFile) { logger.error(result); }
+				(defOptions.logToFile) ? logger.error(result) : '';
 				break;
 			case 'warning':
-				if (defOptions.logToFile) { logger.warn(result); }
+				(defOptions.logToFile) ? logger.warn(result) : '';
 				break;
 			case 'info':
-				if (defOptions.logToFile) { logger.info(result); }
+				defOptions.logToFile ? logger.info(result) : '';
 				break;
 			case 'success':
-				if (defOptions.logToFile) { logger.info(result); }
+				defOptions.logToFile ? logger.info(result) : '';
 				break;
 			case 'time':
-				if (defOptions.logToFile) { logger.info(result); }
+				defOptions.logToFile ? logger.info(result) : '';
 				break;
 			case 'debug':
-				if (defOptions.logToFile) { logger.log('debug', result); }
+				defOptions.logToFile ? logger.log('debug', result) : '';
 				break;
 			case 'default':
-				if (defOptions.logToFile) { logger.info(result); }
+				defOptions.logToFile ? logger.info(result) : '';
 				break;
 		}
 	}
@@ -182,7 +175,7 @@ function msg(style, useFlush) {
 		var lastFile = {};
 		var start    = process.hrtime();
 
-		function transform(file, callback) {
+		function transform(file, enc, callback) {
 			lastFile = file;
 
 			if (!useFlush) {
@@ -212,7 +205,7 @@ function msg(style, useFlush) {
 	};
 }
 
-function init() {
+function init(options) {
 
 	return function(options) {
 
@@ -231,11 +224,9 @@ function init() {
 			logger.add(winston.transports.File,{filename: defOptions.logFilename});
 		}
 
-		if(defOptions.logToFile) {
-			mkdirp(defOptions.logPath);
-		}
+		mkdirp(defOptions.logPath);
 		defOptions.logInitialized = true;
-	};
+	}
 }
 
 function Msg(style) {
