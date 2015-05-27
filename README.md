@@ -126,7 +126,7 @@ Lodash template.
 #### Usage
 
 ```js
-msg.Info('Enviroment: <%= env.NODE_ENV %>. Name: <%= name %>', {foo: 'codedungeon'})
+msg.Info('Enviroment: <%= env.NODE_ENV %>. Name: <%= name %>', {name: 'codedungeon'})
 //Enviroment: dev. name: codedungeon
 ```
 

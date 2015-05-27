@@ -6,6 +6,12 @@
 
 ## Changelog
 
+- 0.0.31
+    - Fixed reuslts when using msg.Time/time.  It was not echoing current time as it should
+    
+- 0.0.30 Logging To File
+    - Fixed issue when logging to `logger` file instance
+    
 - 0.0.28 Bug Fixes
     - Fixed issue with `timestamp` option not properlly including timestamp
 

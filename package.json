@@ -1,7 +1,7 @@
 {
   "name": "gulp-messenger",
   "description": "Console and File Logger",
-  "version": "0.0.28",
+  "version": "0.0.31",
   "repository": {
     "type": "git",
     "url": "https://github.com/mikeerickson/gulp-messenger"
@@ -25,6 +25,7 @@
   "dependencies": {
     "chalk": "^1.0.0",
     "defaults": "^1.0.2",
+    "gulp-clean": "^0.3.1",
     "lodash": "^3.0.0",
     "lodash-deep": "^1.6.0",
     "mkdirp": "^0.5.1",
@@ -43,13 +44,15 @@
   "main": "index.js",
   "devDependencies": {
     "chai": "^2.3.0",
-    "chalk": "^1.0.0",
+    "gulp-mocha": "^2.1.0",
+    "gulp-run": "^1.6.8",
+    "gulp-todo": "^3.0.0",
+    "jshint-stylish": "^2.0.0",
     "lodash": "^3.0.0",
     "lodash-deep": "^1.6.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.5",
-    "pretty-hrtime": "^1.0.0",
-    "through2": "^0.6.3"
+    "require-dir": "^0.3.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha spec"

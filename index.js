@@ -1,3 +1,7 @@
+/*global require*/
+
+"use strict";
+
 var path         = require("path");
 var through      = require('through2');
 var prettyHrtime = require('pretty-hrtime');
@@ -40,6 +44,7 @@ function notify(style, before, message, after, data) {
 	var text, variable;
 	var result = '';
 	var tokens;
+
 
 	tokens = ( typeof message !== 'object') ? message.split(VALUE_REGEXP) : tokens = message;
 	switch (style) {
@@ -98,6 +103,28 @@ function notify(style, before, message, after, data) {
 		}
 	}
 
+	function setConsole() {
+
+		var hCurrentTime = moment().format('HH:mm:ss');
+
+		if ( defOptions.logToConsole ) {
+			if ( defOptions.timestamp || (style === 'time')) {
+				if ( style === 'time') {
+					console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + hCurrentTime);
+				} else {
+					if ( result ) {
+						console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + result);
+					}
+				}
+
+			} else {
+				console.log(result);
+			}
+		}
+
+
+	}
+
 	function setLine(line) {
 		if (!line) { return; }
 
@@ -135,17 +162,7 @@ function notify(style, before, message, after, data) {
 	}
 
 	setLine(before);
-	// need to get time here and output if option enabled
-
-	if ( defOptions.logToConsole ) {
-		if ( defOptions.timestamp ) {
-			if ( result ) {
-				console.log(chalk.grey.dim('[' + moment().format('h:mm:ss') + '] ') + result);
-			}
-		} else {
-			console.log(result);
-		}
-	}
+	setConsole();
 	setLine(after);
 	logToFile(style, result);
 
@@ -217,6 +234,8 @@ function msg(style, useFlush) {
 
 function init(options) {
 
+	var added = false;
+
 	return function(options) {
 
 		if ( typeof options !== 'undefined') {
@@ -227,21 +246,25 @@ function init(options) {
 			defOptions.logPath += '/';
 		}
 
+		// create log path if it doesnt already exist
+		mkdirp(defOptions.logPath);
+
 		defOptions.logFilename = defOptions.logPath + defOptions.logFile;
 		if ( defOptions.rotateLog ) {
 			logger.add(winston.transports.DailyRotateFile,{filename: defOptions.logFilename});
 		} else {
-			logger.add(winston.transports.File,{filename: defOptions.logFilename});
+			if( !added ) {
+				added = true;
+				logger.add(winston.transports.File,{filename: defOptions.logFilename});
+			}
 		}
-
-		mkdirp(defOptions.logPath);
 		defOptions.logInitialized = true;
-	}
+	};
 }
 
 function Msg(style) {
 	return function() {
-		var args = getArgs(arguments);
+var args = getArgs(arguments);
 		notify(style, args.before, args.message, args.after, args.data);
 	};
 }

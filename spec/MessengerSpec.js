@@ -11,17 +11,22 @@ var expect = require('chai').expect;
 
 // msg.init(); default
 // initialize plugin option override
-msg.init({
-		logToFile:     true,
-		logToConsole:  true,
-		rotateLog:     false,
-		logPath:       'logs',
-		logFile:       'myLog.log'
-	});
 
 describe("Messenger (Console / Logger) for Browser and Server, including `gulp` pipeline support", function() {
 
+	beforeEach(function(){
+		msg.init({
+			logToFile:     true,
+			logToConsole:  true,
+			rotateLog:     false,
+			timestamp:     true,
+			logPath:       'spec/logs',
+			logFile:       'myLog.log'
+		});
+	});
+
 	it("should test all messenger routines", function(done) {
+
 		// msg.Log('log');
 		msg.Info('info');
 		msg.Error('error');
