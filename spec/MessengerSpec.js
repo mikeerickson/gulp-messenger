@@ -8,6 +8,7 @@
 
 var msg    = require('../index');
 var expect = require('chai').expect;
+var chalk  = require('chalk');
 
 // msg.init(); default
 // initialize plugin option override
@@ -38,6 +39,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Debug('debug');
 		msg.Info('*','Bordered Output','=');
 		msg.Warning('Testing interpolation by <%= fname %> <%= lname %>',{fname: 'Mike', lname: 'Erickson'});
+		msg.Line();
 		expect(true).to.be.equal(true);
 
 		done();
@@ -54,6 +56,16 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		expect(true).to.be.equal(true);
 		done();
 	});
+
+	it('should_support_all_optional_params',function(done){
+
+		msg.Line();
+		msg.Line('#');
+		msg.Line('-',40);
+		done();
+
+	});
+
 
 
 });

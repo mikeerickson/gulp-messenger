@@ -6,6 +6,12 @@
 
 ## Changelog
 
+- 0.0.32
+    - exposed msg.line method
+      msg.line({character, numChars});
+       * character (default =)
+       * numChars  (default 80)
+       
 - 0.0.31
     - Fixed reuslts when using msg.Time/time.  It was not echoing current time as it should
     

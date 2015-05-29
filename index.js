@@ -45,7 +45,8 @@ function notify(style, before, message, after, data) {
 	var result = '';
 	var tokens;
 
-
+	// 2015.05.28 - added bounds check, exposed when adding *.line() routine
+	if( message === undefined ) message = '';
 	tokens = ( typeof message !== 'object') ? message.split(VALUE_REGEXP) : tokens = message;
 	switch (style) {
 		case "info":
@@ -73,6 +74,10 @@ function notify(style, before, message, after, data) {
 			variable = chalk.magenta.bold;
 			break;
 		case "debug":
+			text     = chalk.grey.dim;
+			variable = chalk.grey.dim.bold;
+			break;
+		case "line":
 			text     = chalk.grey.dim;
 			variable = chalk.grey.dim.bold;
 			break;
@@ -154,6 +159,9 @@ function notify(style, before, message, after, data) {
 				break;
 			case 'debug':
 				defOptions.logToFile ? logger.log('debug', result) : '';
+				break;
+			case 'line':
+				defOptions.logToFile ? logger.log('log', result) : '';
 				break;
 			case 'default':
 				defOptions.logToFile ? logger.info(result) : '';
@@ -262,9 +270,9 @@ function init(options) {
 	};
 }
 
-function Msg(style) {
-	return function() {
-var args = getArgs(arguments);
+	function Msg(style) {
+		return function() {
+		var args = getArgs(arguments);
 		notify(style, args.before, args.message, args.after, args.data);
 	};
 }
@@ -280,6 +288,7 @@ module.exports = {
 	note:    msg('note'),
 	time:    msg('time'),
 	debug:   msg('debug'),
+	line:    msg('info'),
 	flush: {
 		info:    msg('info', true),
 		success: msg('success', true),
@@ -288,7 +297,8 @@ module.exports = {
 		error:   msg('error', true),
 		note:    msg('note', true),
 		time:    msg('time', true),
-		debug:   msg('debug', true)
+		debug:   msg('debug', true),
+		line:    msg('log', true),
 	},
 	Info:    new Msg('info'),
 	Success: new Msg('success'),
@@ -297,5 +307,6 @@ module.exports = {
 	Error:   new Msg('error'),
 	Note:    new Msg('note'),
 	Time:    new Msg('time'),
-	Debug:   new Msg('debug')
+	Debug:   new Msg('debug'),
+	Line:    new Msg('info')
 };
