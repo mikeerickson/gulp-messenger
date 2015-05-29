@@ -66,6 +66,4 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
 	});
 
-
-
 });

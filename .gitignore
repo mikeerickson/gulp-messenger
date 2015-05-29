@@ -9,4 +9,4 @@ config.js
 tasks/config.js
 /tasks/config
 /spec/logs
-
+todo*.*

@@ -6,6 +6,10 @@
 
 ## Changelog
 
+- 0.0.33
+    - Workflow Refinements
+      * gulpfile, tasks, etc
+      
 - 0.0.32
     - exposed msg.line method
       msg.line({character, numChars});
