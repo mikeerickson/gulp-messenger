@@ -1,4 +1,5 @@
 /*global require*/
+/*global process*/
 
 "use strict";
 
@@ -10,6 +11,7 @@ var winston      = require('winston');
 var mkdirp       = require('mkdirp');
 var defaults     = require('defaults');
 var moment       = require('moment');
+var is           = require('is_js');
 
 var _            = require('lodash');
 
@@ -18,10 +20,8 @@ _.mixin(require('lodash-deep'));
 var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
 
 
-// SETUP DEFUAL OPTIONS
+// SETUP DEFAULT OPTIONS
 // =============================================================================
-// TODO: Make time output an option (perhaps set as default paramters when loaded)
-// TODO: Add support for passing options
 
 var defOptions = {
 	logToFile:     false,
@@ -46,8 +46,10 @@ function notify(style, before, message, after, data) {
 	var tokens;
 
 	// 2015.05.28 - added bounds check, exposed when adding *.line() routine
-	if( message === undefined ) { message = ''; }
-	tokens = ( typeof message !== 'object') ? message.split(VALUE_REGEXP) : tokens = message;
+	if( is.undefined(message) ) { message = ''; }
+
+
+	tokens = (is.not.object(message) ) ? message.split(VALUE_REGEXP) : tokens = message;
 	switch (style) {
 		case "info":
 			text     = chalk.cyan;
@@ -96,7 +98,7 @@ function notify(style, before, message, after, data) {
 	}
 
 	// interpolate string
-	if ( typeof tokens === 'object') {
+	if (is.object(tokens)) {
 		result = text(tokens);
 	} else {
 		for (var i = 0; i < tokens.length; i++) {
@@ -184,13 +186,13 @@ function getArgs(args) {
 		data:    args[3]
 	};
 
-	if (typeof args[1] !== 'string') {
+	if(is.not.string([args[1]])) {
 		result.before  = null;
 		result.message = args[0];
 		result.after   = null;
 		result.data    = args[1];
 
-	} else if (typeof args[2] !== 'string') {
+	} else if (is.not.string([args[2]])) {
 		result.before  = args[0];
 		result.message = args[1];
 		result.after   = null;
@@ -246,7 +248,7 @@ function init(options) {
 
 	return function(options) {
 
-		if ( typeof options !== 'undefined') {
+		if(is.not.undefined(options)) {
 			defOptions = defaults(options, defOptions);
 		}
 

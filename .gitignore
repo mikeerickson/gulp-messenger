@@ -9,4 +9,5 @@ config.js
 tasks/config.js
 /tasks/config
 /spec/logs
-todo*.*
+TODO.md
+todo.json
