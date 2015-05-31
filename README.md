@@ -40,9 +40,9 @@ msg.Debug  ('style: <%= name %>', {name: 'debug'});
 
 
 ### API
-#### info/Info, success/Success, warning/Warning, error/Error, note/Note, time/Time, debug/Debug
+#### info/Info, success/Success, warning/Warning, error/Error, note/Note, time/Time, debug/Debug, line/Line
 
-- lowercase methods are to bue used in gulp pipeline
+- lowercase methods are to be used in gulp pipeline
 - Titlecase methods are to be used outside of gulp (ie node or browser)
 
 Default Options (supplied to `init` method)
@@ -57,6 +57,16 @@ var defOptions = {
     rotateLog:     false,
     boldVariables: true
 };
+
+logToFile - will log the supplied message to `logger` instance and log to file (default: false)
+logToConsole - will log message to console (default: true)
+logPath - desired path where log files will be stored (default: 'logs/' at root level)
+logFile - desired filename where log files will be stored (default: 'app.log')
+timestamp - Will include timestamp on consoled messages (default: false)
+rotateLog - will create a new log file each day (default: false)
+boldVariables - when perform interpolation, the actual variable will be bold (default: true)
+
+
 ```
 
 For example `info`
@@ -64,7 +74,7 @@ Use `msg.info` for each file into the stream
 
 ```js
 
-msg.Info('This information message logged to console and optionally log');
+msg.Info('This information message logged to console and optionally log file.  Configured by `options` parameter supplied to `msg.init` method');
 
 or -
 
@@ -121,13 +131,13 @@ totalDuration - duration from gulpfile start
 ##### message
 Type: `String`
 
-Lodash template.
+Lodash compatible template (may also use Underscore over Lodash).
 
 #### Usage
 
 ```js
-msg.Info('Enviroment: <%= env.NODE_ENV %>. Name: <%= name %>', {name: 'codedungeon'})
-//Enviroment: dev. name: codedungeon
+msg.Info('Environment: <%= env.NODE_ENV %>. Name: <%= name %>', {name: 'codedungeon'})
+//Environment: dev. name: codedungeon
 ```
 
 

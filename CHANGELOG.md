@@ -6,6 +6,8 @@
 
 ## Changelog
 
+- 0.0.35 Bug Fixes
+
 - 0.0.34
     - Internal (development level) additions
       * Todo and Test tasks support option of opening report file when completed
