@@ -151,22 +151,22 @@ function notify(style, before, message, after, data) {
 				(defOptions.logToFile) ? logger.warn(result) : '';
 				break;
 			case 'info':
-				defOptions.logToFile ? logger.info(result) : '';
+				(defOptions.logToFile) ? logger.info(result) : '';
 				break;
 			case 'success':
-				defOptions.logToFile ? logger.info(result) : '';
+				(defOptions.logToFile) ? logger.info(result) : '';
 				break;
 			case 'time':
-				defOptions.logToFile ? logger.info(result) : '';
+				(defOptions.logToFile) ? logger.info(result) : '';
 				break;
 			case 'debug':
-				defOptions.logToFile ? logger.log('debug', result) : '';
+				(defOptions.logToFile) ? logger.log('debug', result) : '';
 				break;
 			case 'line':
-				defOptions.logToFile ? logger.log('log', result) : '';
+				(defOptions.logToFile) ? logger.log('log', result) : '';
 				break;
 			case 'default':
-				defOptions.logToFile ? logger.info(result) : '';
+				(defOptions.logToFile) ? logger.info(result) : '';
 				break;
 		}
 	}
