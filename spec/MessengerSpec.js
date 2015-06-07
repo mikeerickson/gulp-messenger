@@ -9,21 +9,25 @@
 var msg    = require('../index');
 var expect = require('chai').expect;
 var chalk  = require('chalk');
+var msg2   = require('gulp-msg');
 
-// msg.init(); default
-// initialize plugin option override
+var user = {fname: 'Mike', lname: 'Erickson'};
 
 describe("Messenger (Console / Logger) for Browser and Server, including `gulp` pipeline support", function() {
 
 	beforeEach(function(){
 		msg.init({
 			logToFile:     true,
-			logToConsole:  true,
-			rotateLog:     false,
-			timestamp:     true,
+			timestamp:     false,
 			logPath:       'spec/logs',
-			logFile:       'myLog.log'
+			logFile:       'myLog.log',
+			boldVariables: false
 		});
+	});
+
+	it("should interpolate string", function(){
+		msg.Info(user);
+		msg.Success('Hello <%=fname%> <%=lname%>:', user);
 	});
 
 	it("should test all messenger routines", function(done) {
@@ -38,26 +42,25 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Time('time');
 		msg.Debug('debug');
 		msg.Info('*','Bordered Output','=');
-		msg.Warning('Testing interpolation by <%= fname %> <%= lname %>',{fname: 'Mike', lname: 'Erickson'});
+		msg.Warning('Testing interpolation by <%=fname %> <%=lname %>', {fname: 'Mike', lname: 'Erickson'});
+		msg.Info({fname: 'Mike', lname: 'Erickson'});
 		msg.Line();
 		expect(true).to.be.equal(true);
 
 		done();
 	});
 
-
 	it('should test all logging routines',function(done){
 		expect(true).to.be.equal(true);
 		done();
 	});
-
 
 	it('should test `gulp` methods', function(done){
 		expect(true).to.be.equal(true);
 		done();
 	});
 
-	it('should_support_all_optional_params',function(done){
+	it('should support all optional params',function(done){
 
 		msg.Line();
 		msg.Line('#');

@@ -6,6 +6,9 @@
 
 ## Changelog
 
+- 0.0.40 Regression Fixes
+    - Fixed regression issue introduced in 0.0.30 causing logs with ojbect as message parameter
+    
 - 0.0.35 Bug Fixes
 
 - 0.0.34
@@ -23,7 +26,7 @@
        * numChars  (default 80)
        
 - 0.0.31
-    - Fixed reuslts when using msg.Time/time.  It was not echoing current time as it should
+    - Fixed results when using msg.Time/time.  It was not echoing current time as it should
     
 - 0.0.30 Logging To File
     - Fixed issue when logging to `logger` file instance

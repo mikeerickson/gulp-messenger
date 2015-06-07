@@ -50,6 +50,9 @@ function notify(style, before, message, after, data) {
 
 
 	tokens = (is.not.object(message) ) ? message.split(VALUE_REGEXP) : tokens = message;
+
+	//console.log('tokens', tokens);
+
 	switch (style) {
 		case "info":
 			text     = chalk.cyan;
@@ -97,17 +100,17 @@ function notify(style, before, message, after, data) {
 		}
 	}
 
-	// interpolate string
-	if (is.object(tokens)) {
-		result = text(tokens);
-	} else {
-		for (var i = 0; i < tokens.length; i++) {
-			if (i%2) {
-				result += variable(_.deepGet(data, tokens[i]) || '');
-			} else {
-				result += text(tokens[i] || '');
-			}
+	for (var i = 0; i < tokens.length; i++) {
+		if (i%2) {
+			result += variable(_.deepGet(data, tokens[i]) || '');
+		} else {
+			result += text(tokens[i] || '');
 		}
+	}
+
+	// if the supplied message is an object, return object (string) as result
+	if(! result.length ) {
+		result = tokens;
 	}
 
 	function setConsole() {
