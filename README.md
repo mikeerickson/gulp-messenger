@@ -43,7 +43,7 @@ msg.Debug  ('style: <%= name %>', {name: 'debug'});
 #### info/Info, success/Success, warning/Warning, error/Error, note/Note, time/Time, debug/Debug, line/Line
 
 - lowercase methods are to be used in gulp pipeline
-- Titlecase methods are to be used outside of gulp (ie node or browser)
+- Titlecase methods are to be used outside of gulp (ie Node or browser)
 
 Default Options (supplied to `init` method)
 
@@ -58,13 +58,26 @@ var defOptions = {
     boldVariables: true
 };
 
-logToFile - will log the supplied message to `logger` instance and log to file (default: false)
-logToConsole - will log message to console (default: true)
-logPath - desired path where log files will be stored (default: 'logs/' at root level)
-logFile - desired filename where log files will be stored (default: 'app.log')
-timestamp - Will include timestamp on consoled messages (default: false)
-rotateLog - will create a new log file each day (default: false)
-boldVariables - when perform interpolation, the actual variable will be bold (default: true)
+logToFile (default: false)
+- will log the supplied message to `logger` instance and log to file 
+
+logToConsole (default: true)
+- will log message to console 
+
+logPath (default: 'logs/' at root level)
+- desired path where log files will be stored 
+
+logFile (default: 'app.log')
+- desired filename where log files will be stored 
+
+timestamp (default: false)
+- Will include timestamp on consoled messages 
+
+rotateLog (default: false)
+- will create a new log file each day 
+
+boldVariables (default: true)
+- when perform interpolation, the actual variable will be bold 
 
 
 ```

@@ -9,7 +9,6 @@
 var msg    = require('../index');
 var expect = require('chai').expect;
 var chalk  = require('chalk');
-var msg2   = require('gulp-msg');
 
 var user = {fname: 'Mike', lname: 'Erickson'};
 
@@ -30,7 +29,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Success('Hello <%=fname%> <%=lname%>:', user);
 	});
 
-	it("should test all messenger routines", function(done) {
+	xit("should test all messenger routines", function(done) {
 
 		// msg.Log('log');
 		msg.Info('info');
@@ -60,13 +59,32 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		done();
 	});
 
-	it('should support all optional params',function(done){
+	xit('should support all optional params',function(done){
 
-		msg.Line();
 		msg.Line('#');
 		msg.Line('-',40);
 		done();
 
 	});
+
+});
+
+describe("Messenger Line Test", function() {
+
+	it("should print lines before and after", function(){
+		msg.Info('=', 'Something Can Go Here', '*');
+		expect(true).to.be.equal(true);
+	});
+
+	it("should print lines before and after", function(){
+		msg.Info('=', 'Line before this message containing `=` ');
+		expect(true).to.be.equal(true);
+	});
+
+	it("should print lines before and after", function(){
+		msg.Info('', 'Line after this message containing `x` ', 'x');
+		expect(true).to.be.equal(true);
+	});
+
 
 });

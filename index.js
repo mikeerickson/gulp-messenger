@@ -1,7 +1,7 @@
 /*global require*/
 /*global process*/
 
-"use strict";
+'use strict';
 
 var path         = require("path");
 var through      = require('through2');
@@ -48,10 +48,7 @@ function notify(style, before, message, after, data) {
 	// 2015.05.28 - added bounds check, exposed when adding *.line() routine
 	if( is.undefined(message) ) { message = ''; }
 
-
 	tokens = (is.not.object(message) ) ? message.split(VALUE_REGEXP) : tokens = message;
-
-	//console.log('tokens', tokens);
 
 	switch (style) {
 		case "info":
@@ -132,7 +129,6 @@ function notify(style, before, message, after, data) {
 			}
 		}
 
-
 	}
 
 	function setLine(line) {
@@ -189,13 +185,13 @@ function getArgs(args) {
 		data:    args[3]
 	};
 
-	if(is.not.string([args[1]])) {
+	if(is.not.string(args[1])) {
 		result.before  = null;
 		result.message = args[0];
 		result.after   = null;
 		result.data    = args[1];
 
-	} else if (is.not.string([args[2]])) {
+	} else if (is.not.string(args[2])) {
 		result.before  = args[0];
 		result.message = args[1];
 		result.after   = null;
@@ -280,6 +276,7 @@ function init(options) {
 		var args = getArgs(arguments);
 		notify(style, args.before, args.message, args.after, args.data);
 	};
+
 }
 
 

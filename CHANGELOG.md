@@ -6,6 +6,11 @@
 
 ## Changelog
 
+- 0.0.41 Bug Fixes
+    - Fixed issue with line printing feature (was not actually use line)
+    - Refreshed all plugin dependencies
+
+
 - 0.0.40 Regression Fixes
     - Fixed regression issue introduced in 0.0.30 causing logs with ojbect as message parameter
     
