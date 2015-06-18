@@ -29,7 +29,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Success('Hello <%=fname%> <%=lname%>:', user);
 	});
 
-	xit("should test all messenger routines", function(done) {
+	it("should test all messenger routines", function(done) {
 
 		// msg.Log('log');
 		msg.Info('info');
@@ -37,7 +37,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Success('success');
 		msg.Warning('warning');
 		msg.Warn("using `warn` shorthand");
-		msg.Note('note');
+		msg.Note(chalk.gray('note, color supplied by `Chalk` instance'));
 		msg.Time('time');
 		msg.Debug('debug');
 		msg.Info('*','Bordered Output','=');
@@ -59,8 +59,9 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		done();
 	});
 
-	xit('should support all optional params',function(done){
+	it('should support all optional params',function(done){
 
+		msg.Info(chalk.magenta('Note:  These are not working correctly yet...'));
 		msg.Line('#');
 		msg.Line('-',40);
 		done();
@@ -72,17 +73,18 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 describe("Messenger Line Test", function() {
 
 	it("should print lines before and after", function(){
-		msg.Info('=', 'Something Can Go Here', '*');
+		msg.Warn('=', 'Testing `Warn` message', '*');
+		msg.Warning('=', 'This is from `Warning` routine', '*');
 		expect(true).to.be.equal(true);
 	});
 
 	it("should print lines before and after", function(){
-		msg.Info('=', 'Line before this message containing `=` ');
+		msg.Error('=', 'Now trying `Error containing `=` ');
 		expect(true).to.be.equal(true);
 	});
 
 	it("should print lines before and after", function(){
-		msg.Info('', 'Line after this message containing `x` ', 'x');
+		msg.Success('', 'A `Success` line after this message containing `x` ', 'x');
 		expect(true).to.be.equal(true);
 	});
 
