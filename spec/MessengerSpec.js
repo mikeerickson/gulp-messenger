@@ -26,7 +26,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
 	it("should interpolate string", function(){
 		msg.Info(user);
-		msg.Success('Hello <%=fname%> <%=lname%>:', user);
+		msg.Success('Hello there <%=fname%> <%=lname%>:', user);
 	});
 
 	it("should test all messenger routines", function(done) {
