@@ -6,6 +6,9 @@
 
 ## Changelog
 
+- 0.0.42 Added new `log` entry point
+    - Added msg.log method 
+    
 - 0.0.41 Bug Fixes
     - Fixed issue with line printing feature (was not actually use line)
     - Refreshed all plugin dependencies

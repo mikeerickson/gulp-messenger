@@ -52,6 +52,7 @@ function notify(style, before, message, after, data) {
 
 	switch (style) {
 		case "info":
+    case 'log':
 			text     = chalk.cyan;
 			variable = chalk.cyan.bold;
 			break;
@@ -150,6 +151,7 @@ function notify(style, before, message, after, data) {
 				(defOptions.logToFile) ? logger.warn(result) : '';
 				break;
 			case 'info':
+      case 'log':
 				(defOptions.logToFile) ? logger.info(result) : '';
 				break;
 			case 'success':
@@ -283,6 +285,7 @@ function init(options) {
 module.exports = {
 	init:    init(),
 	info:    msg('info'),
+	log:     msg('info'),
 	success: msg('success'),
 	warning: msg('warning'),
 	warn:    msg('warning'),
@@ -293,6 +296,7 @@ module.exports = {
 	line:    msg('info'),
 	flush: {
 		info:    msg('info', true),
+		log:     msg('info', true),
 		success: msg('success', true),
 		warning: msg('warning', true),
 		warn:    msg('warning', true),
@@ -303,6 +307,7 @@ module.exports = {
 		line:    msg('log', true),
 	},
 	Info:    new Msg('info'),
+	Log:     new Msg('info'),
 	Success: new Msg('success'),
 	Warning: new Msg('warning'),
 	Warn:    new Msg('warning'),

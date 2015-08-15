@@ -31,7 +31,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
 	it("should test all messenger routines", function(done) {
 
-		// msg.Log('log');
+    msg.Log('log');
 		msg.Info('info');
 		msg.Error('error');
 		msg.Success('success');
