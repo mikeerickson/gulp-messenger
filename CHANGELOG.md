@@ -6,6 +6,10 @@
 
 ## Changelog
 
+- 0.0.43 Added new `header` entry point
+    - Added msg.header method
+      Displays message default text underline (doesn't have its own color)
+
 - 0.0.42 Added new `log` entry point
     - Added msg.log method 
     

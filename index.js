@@ -84,6 +84,10 @@ function notify(style, before, message, after, data) {
 			text     = chalk.grey.dim;
 			variable = chalk.grey.dim.bold;
 			break;
+		case "header":
+			text     = chalk.white.underline;
+			variable = chalk.white;
+			break;
 		default:
 			text     = chalk.gray;
 			variable = chalk.white;
@@ -164,6 +168,9 @@ function notify(style, before, message, after, data) {
 				(defOptions.logToFile) ? logger.log('debug', result) : '';
 				break;
 			case 'line':
+				(defOptions.logToFile) ? logger.log('log', result) : '';
+				break;
+			case "header":
 				(defOptions.logToFile) ? logger.log('log', result) : '';
 				break;
 			case 'default':
@@ -294,6 +301,7 @@ module.exports = {
 	time:    msg('time'),
 	debug:   msg('debug'),
 	line:    msg('info'),
+	header:  msg('header'),
 	flush: {
 		info:    msg('info', true),
 		log:     msg('info', true),
@@ -305,6 +313,7 @@ module.exports = {
 		time:    msg('time', true),
 		debug:   msg('debug', true),
 		line:    msg('log', true),
+		header: msg('header',true),
 	},
 	Info:    new Msg('info'),
 	Log:     new Msg('info'),
@@ -315,5 +324,6 @@ module.exports = {
 	Note:    new Msg('note'),
 	Time:    new Msg('time'),
 	Debug:   new Msg('debug'),
-	Line:    new Msg('info')
+	Line:    new Msg('info'),
+	Header:  new Msg('header'),
 };

@@ -10,7 +10,8 @@ var msg    = require('../index');
 var expect = require('chai').expect;
 var chalk  = require('chalk');
 
-var user = {fname: 'Mike', lname: 'Erickson'};
+var kids = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
+var user = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
 describe("Messenger (Console / Logger) for Browser and Server, including `gulp` pipeline support", function() {
 
@@ -20,13 +21,14 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 			timestamp:     false,
 			logPath:       'spec/logs',
 			logFile:       'myLog.log',
-			boldVariables: false
+			boldVariables: true
 		});
 	});
 
 	it("should interpolate string", function(){
 		msg.Info(user);
-		msg.Success('Hello there <%=fname%> <%=lname%>:', user);
+		msg.Success('Hello there <%= fname %> <%= lname %>:', user);
+		msg.Success('These are our kids <%= kids %>', user);
 	});
 
 	it("should test all messenger routines", function(done) {
@@ -40,6 +42,8 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Note(chalk.gray('note, color supplied by `Chalk` instance'));
 		msg.Time('time');
 		msg.Debug('debug');
+		msg.Header('This should be underline');
+		msg.Log(chalk.red.underline('You can perform any text customization with simple log and `chalk` library'));
 		msg.Info('*','Bordered Output','=');
 		msg.Warning('Testing interpolation by <%=fname %> <%=lname %>', {fname: 'Mike', lname: 'Erickson'});
 		msg.Info({fname: 'Mike', lname: 'Erickson'});
@@ -87,6 +91,5 @@ describe("Messenger Line Test", function() {
 		msg.Success('', 'A `Success` line after this message containing `x` ', 'x');
 		expect(true).to.be.equal(true);
 	});
-
 
 });
