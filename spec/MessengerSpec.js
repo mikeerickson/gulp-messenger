@@ -10,8 +10,8 @@ var msg    = require('../index');
 var expect = require('chai').expect;
 var chalk  = require('chalk');
 
-var kids = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
-var user = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
+var kids   = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
+var user   = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
 describe("Messenger (Console / Logger) for Browser and Server, including `gulp` pipeline support", function() {
 
@@ -25,10 +25,12 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		});
 	});
 
-	it("should interpolate string", function(){
+	it("should interpolate string", function(done){
 		msg.Info(user);
 		msg.Success('Hello there <%= fname %> <%= lname %>:', user);
 		msg.Success('These are our kids <%= kids %>', user);
+
+		done();
 	});
 
 	it("should test all messenger routines", function(done) {
@@ -47,6 +49,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Info('*','Bordered Output','=');
 		msg.Warning('Testing interpolation by <%=fname %> <%=lname %>', {fname: 'Mike', lname: 'Erickson'});
 		msg.Info({fname: 'Mike', lname: 'Erickson'});
+
 		msg.Line();
 		expect(true).to.be.equal(true);
 
@@ -76,20 +79,52 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
 describe("Messenger Line Test", function() {
 
-	it("should print lines before and after", function(){
+	it("should print lines before and after", function(done){
 		msg.Warn('=', 'Testing `Warn` message', '*');
 		msg.Warning('=', 'This is from `Warning` routine', '*');
 		expect(true).to.be.equal(true);
+		done();
 	});
 
-	it("should print lines before and after", function(){
+	it("should print lines before and after", function(done){
 		msg.Error('=', 'Now trying `Error containing `=` ');
 		expect(true).to.be.equal(true);
+		done();
 	});
 
-	it("should print lines before and after", function(){
+	it("should print lines before and after", function(done){
 		msg.Success('', 'A `Success` line after this message containing `x` ', 'x');
 		expect(true).to.be.equal(true);
+		done();
 	});
+
+});
+
+describe('Test Using Console Override', function(done) {
+
+	it('should work with all messenger methods',function(done){
+
+		msg.log('log');
+		msg.info('info');
+		msg.error('error');
+		msg.success('success');
+		msg.warning('warning');
+		msg.warn("using `warn` shorthand");
+		msg.note(chalk.gray('note, color supplied by `Chalk` instance'));
+		msg.time('time');
+		msg.debug('debug');
+		msg.header('This should be underline');
+		msg.log(chalk.red.underline('You can perform any text customization with simple log and `chalk` library'));
+		msg.info('*','Bordered Output','=');
+		msg.warning('Testing interpolation by <%=fname %> <%=lname %>', {fname: 'Mike', lname: 'Erickson'});
+		msg.info({fname: 'Mike', lname: 'Erickson'});
+
+		msg.line();
+		expect(true).to.be.equal(true);
+
+		done();
+
+	});
+
 
 });

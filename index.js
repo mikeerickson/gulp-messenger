@@ -3,6 +3,8 @@
 
 'use strict';
 
+var VERSION      = '0.1.0';
+
 var path         = require("path");
 var through      = require('through2');
 var prettyHrtime = require('pretty-hrtime');
@@ -30,7 +32,8 @@ var defOptions = {
 	logFile:       'app.log',
 	timestamp:     false,
 	rotateLog:     false,
-	boldVariables: true
+	boldVariables: true,
+	lineLength:    80
 };
 
 // SETUP WINSTON
@@ -39,8 +42,8 @@ var defOptions = {
 
 var logger = new (winston.Logger)({ level: 'debug'});
 
-
 function notify(style, before, message, after, data) {
+
 	var text, variable;
 	var result = '';
 	var tokens;
@@ -115,8 +118,12 @@ function notify(style, before, message, after, data) {
 		result = tokens;
 	}
 
-	function setConsole() {
+	function setConsole(data) {
 
+		var callData = {};
+		if ( typeof data !== 'undefined') {
+			callData = data;
+		}
 		var hCurrentTime = moment().format('HH:mm:ss');
 
 		if ( defOptions.logToConsole ) {
@@ -130,7 +137,11 @@ function notify(style, before, message, after, data) {
 				}
 
 			} else {
-				console.log(result);
+				if ( callData.length > 0 ) {
+					console.log(result, callData);
+				} else {
+					console.log(result);
+				}
 			}
 		}
 
@@ -140,7 +151,7 @@ function notify(style, before, message, after, data) {
 		if (!line) { return; }
 
 		var result = '';
-		for (var i = 0; i < 80; i++) {
+		for (var i = 0; i < defOptions.lineLength; i++) {
 			result += line;
 		}
 		if ( defOptions.logToConsole ) { console.log(text(result)); }
@@ -180,7 +191,7 @@ function notify(style, before, message, after, data) {
 	}
 
 	setLine(before);
-	setConsole();
+	setConsole(data);
 	setLine(after);
 	logToFile(style, result);
 
@@ -199,6 +210,7 @@ function getArgs(args) {
 		result.message = args[0];
 		result.after   = null;
 		result.data    = args[1];
+		// result.data    = args;
 
 	} else if (is.not.string(args[2])) {
 		result.before  = args[0];
@@ -207,7 +219,7 @@ function getArgs(args) {
 		result.data    = args[2];
 	}
 
-	result.data = _.merge({env: process.env}, result.data);
+	//result.data = _.merge({env: process.env}, result.data);
 
 	return result;
 }
@@ -291,17 +303,17 @@ function init(options) {
 
 module.exports = {
 	init:    init(),
-	info:    msg('info'),
-	log:     msg('info'),
-	success: msg('success'),
-	warning: msg('warning'),
-	warn:    msg('warning'),
-	error:   msg('error'),
-	note:    msg('note'),
-	time:    msg('time'),
-	debug:   msg('debug'),
-	line:    msg('info'),
-	header:  msg('header'),
+	info:    new Msg('info'),
+	log:     new Msg('info'),
+	success: new Msg('success'),
+	warning: new Msg('warning'),
+	warn:    new Msg('warning'),
+	error:   new Msg('error'),
+	note:    new Msg('note'),
+	time:    new Msg('time'),
+	debug:   new Msg('debug'),
+	line:    new Msg('info'),
+	header:  new Msg('header'),
 	flush: {
 		info:    msg('info', true),
 		log:     msg('info', true),

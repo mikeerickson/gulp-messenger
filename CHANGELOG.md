@@ -6,6 +6,11 @@
 
 ## Changelog
 
+- 0.1.0 
+    - Added support for passing standard data as parameters 2..n
+    - Added support for using `console.` instead of `msg` etc.
+    - Enhanced package to support all `console` methods (eg console.log, console.error, etc)
+
 - 0.0.43 Added new `header` entry point
     - Added msg.header method
       Displays message default text underline (doesn't have its own color)
