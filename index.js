@@ -325,7 +325,7 @@ module.exports = {
 		time:    msg('time', true),
 		debug:   msg('debug', true),
 		line:    msg('log', true),
-		header: msg('header',true),
+		header:  msg('header',true),
 	},
 	Info:    new Msg('info'),
 	Log:     new Msg('info'),
