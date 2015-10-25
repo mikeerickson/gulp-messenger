@@ -23,7 +23,7 @@ describe('Test Using Console Override', function(done) {
 		console.time('time');
 		console.debug('debug');
 		console.header('This should be underline');
-		console.log(chalk.red.underline('You can perform any text customization with simple log and `chalk` library'));
+		console.log(chalk.magenta.italic('You can perform any text customization with simple log and `chalk` library'));
 		console.info('*','Bordered Output','=');
 		console.warning('Testing interpolation by <%=fname %> <%=lname %>', {fname: 'Mike', lname: 'Erickson'});
 		console.info({fname: 'Mike', lname: 'Erickson'});

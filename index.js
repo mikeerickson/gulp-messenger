@@ -3,24 +3,23 @@
 
 'use strict';
 
-var VERSION      = '0.1.0';
+var VERSION      = require('./package.json').version;
 
-var path         = require("path");
-var through      = require('through2');
-var prettyHrtime = require('pretty-hrtime');
 var chalk        = require('chalk');
-var winston      = require('winston');
-var mkdirp       = require('mkdirp');
 var defaults     = require('defaults');
-var moment       = require('moment');
 var is           = require('is_js');
+var mkdirp       = require('mkdirp');
+var moment       = require('moment');
+var path         = require("path");
+var prettyHrtime = require('pretty-hrtime');
+var through      = require('through2');
+var winston      = require('winston');
 
 var _            = require('lodash');
 
 _.mixin(require('lodash-deep'));
 
 var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
-
 
 // SETUP DEFAULT OPTIONS
 // =============================================================================
@@ -127,12 +126,18 @@ function notify(style, before, message, after, data) {
 		var hCurrentTime = moment().format('HH:mm:ss');
 
 		if ( defOptions.logToConsole ) {
+
 			if ( defOptions.timestamp || (style === 'time')) {
+
 				if ( style === 'time') {
 					console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + hCurrentTime);
 				} else {
 					if ( result ) {
-						console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + result);
+            if( Object.keys(arguments[0]).length === 2 ) {
+              console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + result, arguments[0]);
+            } else {
+              console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + result);
+            }
 					}
 				}
 
@@ -198,29 +203,47 @@ function notify(style, before, message, after, data) {
 }
 
 function getArgs(args) {
+
 	var result = {
 		before:  args[0],
 		message: args[1],
-		after:   args[2],
-		data:    args[3]
+		after:   args[2] || null,
+		data:    args[3] || {}
 	};
 
-	if(is.not.string(args[1])) {
-		result.before  = null;
-		result.message = args[0];
-		result.after   = null;
-		result.data    = args[1];
-		// result.data    = args;
+  if(args.length === 1) {
+    result.before = '';
+    result.message = args[0];
+    result.after = '';
+  }
 
-	} else if (is.not.string(args[2])) {
-		result.before  = args[0];
-		result.message = args[1];
-		result.after   = null;
-		result.data    = args[2];
-	}
+  if(args.length === 2) {
+    result.before = args[0];
+    result.message = args[1];
+    result.after = '';
+  }
 
-	//result.data = _.merge({env: process.env}, result.data);
+  if( typeof args[1] !== 'undefined') {
+    if(is.not.string(args[1])) {
+      result.before  = null;
+      result.message = args[0];
+      result.after   = null;
+      result.data    = args[1];
+      // result.data    = args;
+    } else if (is.not.string(args[2])) {
+      result.before  = args[0];
+      result.message = args[1];
+      result.after   = null;
+      result.data    = args[2];
+    }
+  }
 
+  if(typeof(result.data) === 'undefined') {
+    result.data = {};
+    result.data.file = '';
+  }
+
+  //result.data = _.merge({env: process.env}, result.data);
 	return result;
 }
 
@@ -241,7 +264,6 @@ function msg(style, useFlush) {
 				args.data.file.basename = path.basename(file.path);
 				args.data.duration      = prettyHrtime(process.hrtime(start));
 				args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
-
 				notify(style, args.before, args.message, args.after, args.data);
 			}
 			callback(null, file);
@@ -252,8 +274,10 @@ function msg(style, useFlush) {
 				args.data.file          = _.clone(lastFile);
 				args.data.duration      = prettyHrtime(process.hrtime(start));
 				args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
+        var msg = args.message + ' [' + lastFile.relative + '] ';
+        //notify(style, args.before, args.message, args.after, args.data);
 
-				notify(style, args.before, args.message, args.after, args.data);
+        notify(style, args.before, msg, args.after, args.data);
 			}
 			callback();
 		}
@@ -294,11 +318,11 @@ function init(options) {
 
 	function Msg(style) {
 		return function() {
-		var args = getArgs(arguments);
-		notify(style, args.before, args.message, args.after, args.data);
-	};
+		  var args = getArgs(arguments);
+		  notify(style, args.before, args.message, args.after, args.data);
+	  };
 
-}
+  }
 
 
 module.exports = {
@@ -314,6 +338,9 @@ module.exports = {
 	debug:   new Msg('debug'),
 	line:    new Msg('info'),
 	header:  new Msg('header'),
+  version: function() {
+    return VERSION;
+  },
 	flush: {
 		info:    msg('info', true),
 		log:     msg('info', true),
@@ -338,4 +365,7 @@ module.exports = {
 	Debug:   new Msg('debug'),
 	Line:    new Msg('info'),
 	Header:  new Msg('header'),
+  Version: function() {
+    return VERSION;
+  }
 };

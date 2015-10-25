@@ -42,7 +42,7 @@ msg.Debug  ('style: <%= name %>', {name: 'debug'});
 ### API
 #### info/Info, success/Success, warning/Warning, error/Error, note/Note, time/Time, debug/Debug, line/Line
 
-- lowercase methods are to be used in gulp pipeline
+- lowercase methods are to be used in gulp pipeline or outside (same API can be used for both Node, Browser, and Gulp)
 - Titlecase methods are to be used outside of gulp (ie Node or browser)
 
 Default Options (supplied to `init` method)
@@ -88,11 +88,12 @@ Use `msg.info` for each file into the stream
 ```js
 
 msg.Info('This information message logged to console and optionally log file.  Configured by `options` parameter supplied to `msg.init` method');
+msg.info('This information message logged to console and optionally log file.  Configured by `options` parameter supplied to `msg.init` method');
 
 or -
 
 gulp.src('src/**/*')
-    .pipe(msg.info('Piping Message')); //'Piping Message' for each file
+    .pipe(msg.flush.info('Piping Message')); //'Piping Message' for each file
 ```
 
 Use `msg.flush.info` at the and of the stream
@@ -107,6 +108,10 @@ Use `msg.Info` from the outside of the stream
 ```js
 msg.Info('Application Message'); //'Application Message' in node.js application
 ```
+
+### msg.version|msg.Version 
+
+Returns current module version
 
 ### msg.Info([before,] message, [after,] [data])
 

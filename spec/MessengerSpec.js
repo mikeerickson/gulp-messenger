@@ -25,6 +25,11 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		});
 	});
 
+  it("should return version", function(done){
+    msg.header(chalk.red(' *** Gulp-messenger version: ', msg.version()))
+    done();
+  });
+
 	it("should interpolate string", function(done){
 		msg.Info(user);
 		msg.Success('Hello there <%= fname %> <%= lname %>:', user);
@@ -45,7 +50,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 		msg.Time('time');
 		msg.Debug('debug');
 		msg.Header('This should be underline');
-		msg.Log(chalk.red.underline('You can perform any text customization with simple log and `chalk` library'));
+		msg.Log(chalk.red.bold.italic('You can perform any text customization with simple log and `chalk` library'));
 		msg.Info('*','Bordered Output','=');
 		msg.Warning('Testing interpolation by <%=fname %> <%=lname %>', {fname: 'Mike', lname: 'Erickson'});
 		msg.Info({fname: 'Mike', lname: 'Erickson'});

@@ -6,6 +6,10 @@
 
 ## Changelog
 
+- 0.2.0 
+    - Fixed issues with properly display object literals
+    - Added `version` method (returns current package version)
+    
 - 0.1.0 
     - Added support for passing standard data as parameters 2..n
     - Added support for using `console.` instead of `msg` etc.
@@ -64,7 +68,7 @@
     - Added option `boldVariables` to set display of merged variables
     - Added option `logToConsole` to control if messages are sent to console
     - Added option `logToFile` to control is messages are sent to log
-    - Added option `rotateLog` to control log files to have current date appeneded to filename
+    - Added option `rotateLog` to control log files to have current date appended to filename
 
 - 0.0.20 Added .debug command
     - Added msg.debug (msg.Debug) and supported text color
