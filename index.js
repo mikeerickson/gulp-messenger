@@ -155,7 +155,7 @@ function notify(style, before, message, after, data) {
       if(result.indexOf('red')>0) {chalkline.red();}
       if(result.indexOf('yellow')>0) {chalkline.yellow();}
       if(result.indexOf('magenta')>0) {chalkline.magenta();}
-      if(result.indexOf('green')>0) {chalkline.blue();}
+      if(result.indexOf('green')>0) {chalkline.green();}
       if(result.indexOf('blue')>0) {chalkline.blue();}
       if(result.indexOf('white')>0) {chalkline.white();}
       if(result.indexOf('gray')>0) {chalkline.gray();}
