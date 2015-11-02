@@ -124,12 +124,16 @@ describe('Test Using Console Override', function(done) {
 		msg.warning('Testing interpolation by <%=fname %> <%=lname %>', {fname: 'Mike', lname: 'Erickson'});
 		msg.info({fname: 'Mike', lname: 'Erickson'});
 
-		msg.line();
 		expect(true).to.be.equal(true);
 
 		done();
 
 	});
 
+  if('should draw solid lines using .line method and .xxx colors', function (done) {
+      msg.success('test');
+      msg.line.red();
+      msg.line.green();
+    });
 
 });
