@@ -24,7 +24,6 @@ mkdirp('spec/logs', function (err) {
 	if (err) {msg.Error(err);}
 });
 
-
 gulp.task('test:mocha', function () {
 	return gulp.src(config.test.spec, {read: false})
 		.pipe(mocha());

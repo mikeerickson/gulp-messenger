@@ -9,7 +9,9 @@ var config   = require('./config');
 var todo     = require('gulp-todo');
 var msg      = require('../index');
 
-msg.init({timestamp: true});
+
+msg.init({timestamp: true, logToFile: false});
+msg.line('green');
 
 gulp.task('todo', function() {
 	return gulp.src(config.todo.src)

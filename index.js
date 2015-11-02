@@ -1,5 +1,7 @@
 /*global require*/
 /*global process*/
+/* jshint -W030 */
+/* jshint -W098 */
 
 'use strict';
 
@@ -127,7 +129,7 @@ function notify(style, before, message, after, data) {
     }
     var hCurrentTime = moment().format('HH:mm:ss');
 
-    if ( defOptions.logToConsole ) {
+    if (( defOptions.logToConsole ) && ( style !== 'line')){
       if ( defOptions.timestamp || (style === 'time')) {
         if ( style === 'time') {
           console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + hCurrentTime);
@@ -144,21 +146,20 @@ function notify(style, before, message, after, data) {
         if ( callData.length > 0 ) {
           console.log(result, callData);
         } else {
-
-          if ( style === 'line') {
-            if(result.indexOf('red')>0) {chalkline.red();}
-            if(result.indexOf('yellow')>0) {chalkline.yellow();}
-            if(result.indexOf('magenta')>0) {chalkline.magenta();}
-            if(result.indexOf('green')>0) {chalkline.green();}
-            if(result.indexOf('blue')>0) {chalkline.blue();}
-            if(result.indexOf('white')>0) {chalkline.white();}
-            if(result.indexOf('gray')>0) {chalkline.gray();}
-            if(result.indexOf('cyan')>0) {chalkline.cyan();}
-          } else {
-            console.log(result);
-          }
+          console.log(result);
         }
       }
+    }
+
+    if ( style === 'line') {
+      if(result.indexOf('red')>0) {chalkline.red();}
+      if(result.indexOf('yellow')>0) {chalkline.yellow();}
+      if(result.indexOf('magenta')>0) {chalkline.magenta();}
+      if(result.indexOf('green')>0) {chalkline.blue();}
+      if(result.indexOf('blue')>0) {chalkline.blue();}
+      if(result.indexOf('white')>0) {chalkline.white();}
+      if(result.indexOf('gray')>0) {chalkline.gray();}
+      if(result.indexOf('cyan')>0) {chalkline.cyan();}
     }
 
   }
@@ -288,7 +289,6 @@ function msg(style, useFlush) {
 
         var msg = args.message;
 
-        console.log('showPipeFile ', defOptions.showPipeFile);
         if (defOptions.showPipeFile) {
           msg += ' [' + lastFile.relative + '] ';
         }
@@ -333,15 +333,6 @@ function init(options) {
     defOptions.logInitialized = true;
   };
 }
-
-function toHex(str) {
-  var hex = '';
-  for(var i=0;i<str.length;i++) {
-    hex += ''+str.charCodeAt(i).toString(16);
-  }
-  return hex;
-}
-
 
 
 function Msg(style) {

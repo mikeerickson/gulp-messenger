@@ -1,6 +1,7 @@
 var gulp     = require('gulp');
 var console  = require('../index');
 
+
 console.init({
   logToFile:    true,
   timestamp:    false,
