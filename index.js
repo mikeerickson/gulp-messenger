@@ -17,6 +17,7 @@ var prettyHrtime = require('pretty-hrtime');
 var through      = require('through2');
 var winston      = require('winston');
 var chalkline    = require('chalkline');
+var Purdy        = require('purdy');
 
 var _            = require('lodash');
 
@@ -38,6 +39,7 @@ var defOptions = {
   showPipeFile:     true,
   lineLength:       80
 };
+
 
 // SETUP WINSTON
 // =============================================================================
@@ -87,8 +89,8 @@ function notify(style, before, message, after, data) {
       variable = chalk.grey.dim.bold;
       break;
     case "line":
-      text     = chalk.red;
-      variable = chalk.red.bold;
+      text     = chalk.green;
+      variable = chalk.green.bold;
       break;
     case "header":
       text     = chalk.white.underline;
@@ -151,20 +153,15 @@ function notify(style, before, message, after, data) {
       }
     }
 
+    // if we are outputting a line, just spit out what we got using `lineLength`
     if ( style === 'line') {
-      if(result.indexOf('red')>0) {chalkline.red();}
-      if(result.indexOf('yellow')>0) {chalkline.yellow();}
-      if(result.indexOf('magenta')>0) {chalkline.magenta();}
-      if(result.indexOf('green')>0) {chalkline.green();}
-      if(result.indexOf('blue')>0) {chalkline.blue();}
-      if(result.indexOf('white')>0) {chalkline.white();}
-      if(result.indexOf('gray')>0) {chalkline.gray();}
-      if(result.indexOf('cyan')>0) {chalkline.cyan();}
+      setLine(result);
     }
 
   }
 
   function setLine(line) {
+
     if (!line) { return; }
 
     var result = '';
@@ -343,7 +340,6 @@ function Msg(style) {
 
 }
 
-
 module.exports = {
   init:    init(),
   info:    new Msg('info'),
@@ -357,9 +353,17 @@ module.exports = {
   debug:   new Msg('debug'),
   line:    new Msg('line'),
   header:  new Msg('header'),
+  purdy: function(){
+    Purdy.apply(Purdy, arguments);
+  },
+  dump: function() {
+    Purdy.apply(Purdy, arguments);
+  },
   version: function() {
     return VERSION;
   },
+  chalkline: chalkline,
+  chalk: chalk,
   flush: {
     info:    msg('info', true),
     log:     msg('info', true),
@@ -372,6 +376,13 @@ module.exports = {
     debug:   msg('debug', true),
     line:    msg('line', true),
     header:  msg('header',true),
+    chalkline: chalkline,
+    purdy: function() {
+      Purdy.apply(Purdy, arguments);
+    },
+    dump: function(){
+      Purdy.apply(Purdy, arguments);
+    }
   },
   Info:    new Msg('info'),
   Log:     new Msg('info'),
@@ -384,6 +395,12 @@ module.exports = {
   Debug:   new Msg('debug'),
   Line:    new Msg('line'),
   Header:  new Msg('header'),
+  Purdy: function() {
+    Purdy.apply(Purdy, arguments);
+  },
+  Dump: function() {
+    Purdy.apply(Purdy, arguments);
+  },
   Version: function() {
     return VERSION;
   }
