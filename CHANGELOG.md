@@ -6,6 +6,13 @@
 
 ## Changelog
 
+- 0.5.0
+    - Lots of fixes internally before be pushed to public consumption
+      - Added `chalk` instance ( msg.chalk... )
+      - Added `chalkline` instance ( msg.chalkline... )
+      - Added `dump` method ( msg.dump )
+      - Updated `line` method 
+      
 - 0.2.0 
     - Fixed issues with properly display object literals
     - Added `version` method (returns current package version)
