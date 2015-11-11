@@ -126,7 +126,7 @@ function notify(style, before, message, after, data) {
   function setConsole(data) {
 
     var callData = {};
-    if ( typeof data !== 'undefined') {
+    if ( is.undefined(data) ) {
       callData = data;
     }
     var hCurrentTime = moment().format('HH:mm:ss');
@@ -232,7 +232,7 @@ function getArgs(args) {
     result.after = '';
   }
 
-  if( typeof args[1] !== 'undefined') {
+  if( is.not.undefined(args[1]) ) {
     if(is.not.string(args[1])) {
       result.before  = null;
       result.message = args[0];
@@ -246,8 +246,7 @@ function getArgs(args) {
       result.data    = args[2];
     }
   }
-
-  if(typeof(result.data) === 'undefined') {
+  if( is.undefined(result.data) ) {
     result.data = {};
     result.data.file = '';
   }
@@ -315,7 +314,7 @@ function init(options) {
       defOptions.logPath += '/';
     }
 
-    // create log path if it doesnt already exist
+    // create log path if it doesn't already exist
     mkdirp(defOptions.logPath);
 
     defOptions.logFilename = defOptions.logPath + defOptions.logFile;
@@ -331,6 +330,35 @@ function init(options) {
   };
 }
 
+function setOptions(options) {
+
+  var added = true;
+
+  return function(options) {
+
+    if(is.not.undefined(options)) {
+      defOptions = defaults(options, defOptions);
+    }
+
+    if(defOptions.logPath[defOptions.logPath.length] !== '/') {
+      defOptions.logPath += '/';
+    }
+
+    // create log path if it doesn't already exist
+    mkdirp(defOptions.logPath);
+
+    defOptions.logFilename = defOptions.logPath + defOptions.logFile;
+    if ( defOptions.rotateLog ) {
+      logger.add(winston.transports.DailyRotateFile,{filename: defOptions.logFilename});
+    } else {
+      if( !added ) {
+        added = true;
+        logger.add(winston.transports.File,{filename: defOptions.logFilename});
+      }
+    }
+    defOptions.logInitialized = true;
+  };
+}
 
 function Msg(style) {
   return function() {
@@ -341,29 +369,30 @@ function Msg(style) {
 }
 
 module.exports = {
-  init:    init(),
-  info:    new Msg('info'),
-  log:     new Msg('info'),
-  success: new Msg('success'),
-  warning: new Msg('warning'),
-  warn:    new Msg('warning'),
-  error:   new Msg('error'),
-  note:    new Msg('note'),
-  time:    new Msg('time'),
-  debug:   new Msg('debug'),
-  line:    new Msg('line'),
-  header:  new Msg('header'),
-  purdy: function(){
+  init:       init(),
+  setOptions: setOptions(),
+  info:       new Msg('info'),
+  log:        new Msg('info'),
+  success:    new Msg('success'),
+  warning:    new Msg('warning'),
+  warn:       new Msg('warning'),
+  error:      new Msg('error'),
+  note:       new Msg('note'),
+  time:       new Msg('time'),
+  debug:      new Msg('debug'),
+  line:       new Msg('line'),
+  header:     new Msg('header'),
+  purdy:      function(){
     Purdy.apply(Purdy, arguments);
   },
-  dump: function() {
+  dump:       function() {
     Purdy.apply(Purdy, arguments);
   },
-  version: function() {
+  version:    function() {
     return VERSION;
   },
-  chalkline: chalkline,
-  chalk: chalk,
+  chalkline:  chalkline,
+  chalk:      chalk,
   flush: {
     info:    msg('info', true),
     log:     msg('info', true),
@@ -384,24 +413,24 @@ module.exports = {
       Purdy.apply(Purdy, arguments);
     }
   },
-  Info:    new Msg('info'),
-  Log:     new Msg('info'),
-  Success: new Msg('success'),
-  Warning: new Msg('warning'),
-  Warn:    new Msg('warning'),
-  Error:   new Msg('error'),
-  Note:    new Msg('note'),
-  Time:    new Msg('time'),
-  Debug:   new Msg('debug'),
-  Line:    new Msg('line'),
-  Header:  new Msg('header'),
-  Purdy: function() {
+  Info:       new Msg('info'),
+  Log:        new Msg('info'),
+  Success:    new Msg('success'),
+  Warning:    new Msg('warning'),
+  Warn:       new Msg('warning'),
+  Error:      new Msg('error'),
+  Note:       new Msg('note'),
+  Time:       new Msg('time'),
+  Debug:      new Msg('debug'),
+  Line:       new Msg('line'),
+  Header:     new Msg('header'),
+  Purdy:     function() {
     Purdy.apply(Purdy, arguments);
   },
-  Dump: function() {
+  Dump:      function() {
     Purdy.apply(Purdy, arguments);
   },
-  Version: function() {
+  Version:   function() {
     return VERSION;
   }
 };

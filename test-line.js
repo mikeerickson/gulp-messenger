@@ -1,4 +1,7 @@
 var console = require('./index');
+var bowser  = require('bowser');
+
+console.dump(bowser)
 
 console.log('test line');
 console.line('#');
