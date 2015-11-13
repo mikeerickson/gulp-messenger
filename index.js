@@ -126,7 +126,7 @@ function notify(style, before, message, after, data) {
   function setConsole(data) {
 
     var callData = {};
-    if ( is.undefined(data) ) {
+    if ( is.not.undefined(data) ) {
       callData = data;
     }
     var hCurrentTime = moment().format('HH:mm:ss');
@@ -145,7 +145,7 @@ function notify(style, before, message, after, data) {
           }
         }
       } else {
-        if ( callData.length > 0 ) {
+        if ( Object.keys(callData).length > 0 ) {
           console.log(result, callData);
         } else {
           console.log(result);
