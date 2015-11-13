@@ -12,7 +12,6 @@ var family = {
 	}
 };
 
-
 console.log('hello world!', family.all(), family);
 msg.Log('hello world!', family.all(), family);
 

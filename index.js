@@ -382,7 +382,10 @@ module.exports = {
   debug:      new Msg('debug'),
   line:       new Msg('line'),
   header:     new Msg('header'),
-  purdy:      function(){
+  dir:        function() {
+    Purdy.apply(Purdy, arguments);
+  },
+  purdy:      function() {
     Purdy.apply(Purdy, arguments);
   },
   dump:       function() {
@@ -406,6 +409,9 @@ module.exports = {
     line:    msg('line', true),
     header:  msg('header',true),
     chalkline: chalkline,
+    dir: function() {
+      Purdy.apply(Purdy, arguments);
+    },
     purdy: function() {
       Purdy.apply(Purdy, arguments);
     },
