@@ -145,10 +145,15 @@ function notify(style, before, message, after, data) {
           }
         }
       } else {
-        if ( Object.keys(callData).length > 0 ) {
-          console.log(result, callData);
+
+        if ( is.object(callData)) {
+          if ( Object.keys(callData).length > 0 ) {
+            console.log(result, callData);
+          } else {
+            console.log(result);
+          }
         } else {
-          console.log(result);
+          console.log(result, callData)
         }
       }
     }
@@ -279,17 +284,21 @@ function msg(style, useFlush) {
 
     function flush(callback) {
       if (useFlush) {
+
+        // not sure how this is going to be used as we are clearing .data below
         args.data.file          = _.clone(lastFile);
         args.data.duration      = prettyHrtime(process.hrtime(start));
         args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
 
-        var msg = args.message;
+        // gulp pipeline specifc
+        defOptions.timestamp = true; // timestamp always true when in pipeline
+        args.data = {};              // no data available in gulp pipeline
 
+        // this is only appropriate adjustment to message (to include the filename)
+        var msg = args.message;
         if (defOptions.showPipeFile) {
           msg += ' [' + lastFile.relative + '] ';
         }
-
-        //notify(style, args.before, args.message, args.after, args.data);
 
         notify(style, args.before, msg, args.after, args.data);
       }

@@ -7,7 +7,7 @@
 ## Changelog
 
 - 0.6.2
-    - Added .dir routine (calls .dump internally)
+    - Added `dir` routine (calls `dump` internally)
     - Fixed issues related to passing object data in addition to messages (regression)
 - 0.5.0
     - Lots of fixes internally before be pushed to public consumption
