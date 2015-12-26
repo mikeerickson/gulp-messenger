@@ -55,7 +55,8 @@ var defOptions = {
     logFile:       'app.log',
     timestamp:     false,
     rotateLog:     false,
-    boldVariables: true
+    boldVariables: true, 
+    useDumpForObjects: true
 };
 
 logToFile (default: false)
@@ -77,7 +78,11 @@ rotateLog (default: false)
 - will create a new log file each day 
 
 boldVariables (default: true)
-- when perform interpolation, the actual variable will be bold 
+- when perform interpolation, the actual variable will be bold
+
+useDumpForObjects (defualt: true)
+- when enabled, is passing a single object paramter, msg.dump() will be used instead of standard console output
+- when disabled, native msg.xxx will be used (default colors, etc)
 
 
 ```

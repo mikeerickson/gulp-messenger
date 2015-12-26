@@ -8,7 +8,6 @@
 var VERSION      = require('./package.json').version;
 
 var chalk        = require('chalk');
-var defaults     = require('defaults');
 var is           = require('is_js');
 var mkdirp       = require('mkdirp');
 var moment       = require('moment');
@@ -29,15 +28,16 @@ var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
 // =============================================================================
 
 var defOptions = {
-  logToFile:        false,
-  logToConsole:     true,
-  logPath:          'logs/',
-  logFile:          'app.log',
-  timestamp:        false,
-  rotateLog:        false,
-  boldVariables:    true,
-  showPipeFile:     true,
-  lineLength:       80
+  logToFile:         false,
+  logToConsole:      true,
+  logPath:           'logs/',
+  logFile:           'app.log',
+  timestamp:         false,
+  rotateLog:         false,
+  boldVariables:     true,
+  showPipeFile:      true,
+  useDumpForObjects: true,
+  lineLength:        80
 };
 
 
@@ -316,7 +316,7 @@ function init(options) {
   return function(options) {
 
     if(is.not.undefined(options)) {
-      defOptions = defaults(options, defOptions);
+      defOptions = _.defaults(options, defOptions);
     }
 
     if(defOptions.logPath[defOptions.logPath.length] !== '/') {
@@ -346,7 +346,7 @@ function setOptions(options) {
   return function(options) {
 
     if(is.not.undefined(options)) {
-      defOptions = defaults(options, defOptions);
+      defOptions = _.defaults(options, defOptions);
     }
 
     if(defOptions.logPath[defOptions.logPath.length] !== '/') {
@@ -372,7 +372,11 @@ function setOptions(options) {
 function Msg(style) {
   return function() {
     var args = getArgs(arguments);
-    notify(style, args.before, args.message, args.after, args.data);
+    if((is.object(args.message)) && (arguments.length === 1) && (defOptions.useDumpForObjects)) {
+      Purdy(args.message);
+    } else {
+      notify(style, args.before, args.message, args.after, args.data);
+    }
   };
 
 }
@@ -405,6 +409,7 @@ module.exports = {
   },
   chalkline:  chalkline,
   chalk:      chalk,
+  colors:     chalk,
   flush: {
     info:    msg('info', true),
     log:     msg('info', true),

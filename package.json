@@ -1,7 +1,7 @@
 {
   "name": "gulp-messenger",
   "description": "Console and File Logger",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/mikeerickson/gulp-messenger"
@@ -26,7 +26,7 @@
     "bowser": "1.0.0",
     "chalk": "1.1.1",
     "chalkline": "0.0.4",
-    "defaults": "^1.0.2",
+    "defaults": "1.0.3",
     "detect-node": "^2.0.3",
     "gulp-debug": "2.1.2",
     "is_js": "0.7.4",
@@ -51,7 +51,9 @@
     "chai": "^3.3.0",
     "gulp": "3.9.0",
     "gulp-clean": "^0.3.1",
+    "gulp-ignore": "2.0.1",
     "gulp-mocha": "2.1.3",
+    "gulp-rimraf": "0.2.0",
     "gulp-run": "1.6.11",
     "gulp-todo": "4.0.0",
     "install": "^0.1.8",
@@ -70,6 +72,7 @@
     "mocha": "^2.3.3",
     "mocha-sinon": "1.1.4",
     "mochawesome": "1.2.1",
+    "moment": "2.10.6",
     "npm": "^2.11.0",
     "path-exists": "^1.0.0",
     "phantomjs": "^1.9.18",

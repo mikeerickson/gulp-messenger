@@ -19,3 +19,4 @@ test-console.js
 simple.js
 spec/SampleSpec.js
 /spec/logs/
+/sandbox/

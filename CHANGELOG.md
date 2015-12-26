@@ -5,7 +5,13 @@
 
 
 ## Changelog
-
+  
+- 0.9.0
+    - When executing `msg` command, supplying object as only parameter, it will use .dump command, displaying pretty output
+      - If you dont want to use `dump` command for object output, disable `useDumpForObjects` options
+    - Added mew `useDumpForObjects` option property to control default output option for simple objects
+- 0.8.0
+    - New command `msg.colors` which is an instance of Chalk
 - 0.6.2
     - Added `dir` routine (calls `dump` internally)
     - Fixed issues related to passing object data in addition to messages (regression)
