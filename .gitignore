@@ -17,6 +17,5 @@ karma.conf.js
 test-line.js
 test-console.js
 simple.js
-spec/SampleSpec.js
 /spec/logs/
 /sandbox/

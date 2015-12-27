@@ -56,7 +56,11 @@ function notify(style, before, message, after, data) {
 // 2015.05.28 - added bounds check, exposed when adding *.line() routine
   if( is.undefined(message) ) { message = ''; }
 
-  tokens = (is.not.object(message) ) ? message.split(VALUE_REGEXP) : tokens = message;
+  if ( (is.not.object(message)) && (is.not.number(message)) ) {
+    tokens = message.split(VALUE_REGEXP);
+  } else {
+    tokens = message;
+  }
 
   switch (style) {
     case "info":
