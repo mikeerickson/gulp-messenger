@@ -28,12 +28,14 @@ var options = { logToFile: false, boldVariables: false };
 msg.init(options);
 
 
+// You can use titleCase or lower case for msg methods
 msg.Info('-', 'Loading...', '*');
-msg.Info   ('style: <%= name %>', {name: 'info'});
-msg.Success('style: <%= name %>', {name: 'success'});
-msg.Warning('style: <%= name %>', {name: 'warning'});
-msg.Error  ('style: <%= name %>', {name: 'error'});
-msg.Note   ('style: <%= name %>', {name: 'note'});
+msg.log    ('style: <%= name %>', {name: 'info'});     // default color White
+msg.Info   ('style: <%= name %>', {name: 'info'});     // default color Cyan
+msg.Success('style: <%= name %>', {name: 'success'});  // default color Green
+msg.Warning('style: <%= name %>', {name: 'warning'});  // default color Yellow
+msg.Error  ('style: <%= name %>', {name: 'error'});    // default color Red
+msg.Note   ('style: <%= name %>', {name: 'note'});     // default color Orange
 msg.Time   ('style: <%= name %>', {name: 'time'});
 msg.Debug  ('style: <%= name %>', {name: 'debug'});
 ```
@@ -80,7 +82,7 @@ rotateLog (default: false)
 boldVariables (default: true)
 - when perform interpolation, the actual variable will be bold
 
-useDumpForObjects (defualt: true)
+useDumpForObjects (default: true)
 - when enabled, is passing a single object paramter, msg.dump() will be used instead of standard console output
 - when disabled, native msg.xxx will be used (default colors, etc)
 
@@ -97,8 +99,10 @@ msg.info('This information message logged to console and optionally log file.  C
 
 or -
 
+// If you using in gulp stream, include the `flush` property as shown here  
+// All messenger routines (except dump) are supported in the gulp pipleline  
 gulp.src('src/**/*')
-    .pipe(msg.flush.info('Piping Message')); //'Piping Message' for each file
+    .pipe(msg.flush.info('Piping Message'));  // 'Piping Message' for each file
 ```
 
 Use `msg.flush.info` at the and of the stream
