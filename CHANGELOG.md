@@ -6,6 +6,16 @@
 
 ## Changelog
   
+- 0.10.0
+    - Added new `orange` color which is default color for console.note routing
+    - If you wish to use orange in any other output, the correct ASCI command to use
+
+      var COLOR_ORANGE = "\033[38;5;214m";
+      msg.log(COLOR_ORANGE + 'Hello World!');
+
+      * Note: The orange color is using 256 palette so it may not appear identical across !terminals
+      * I have tested on OSX, Windows, CentOS 6/7 and Ubuntu 12/14
+      
 - 0.9.0
     - When executing `msg` command, supplying object as only parameter, it will use .dump command, displaying pretty output
       - If you dont want to use `dump` command for object output, disable `useDumpForObjects` options

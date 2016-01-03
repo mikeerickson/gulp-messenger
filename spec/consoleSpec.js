@@ -7,6 +7,7 @@ var chalk   = require('chalk');
 var kids   = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
 var user   = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
+console.note('ConsoleSpec.js - default note output');
 
 describe('Test Using Console Override', function(done) {
 
@@ -20,6 +21,7 @@ describe('Test Using Console Override', function(done) {
 		console.warning('warning');
 		console.warn("using `warn` shorthand");
 		console.note(chalk.magenta('note, color supplied by `Chalk` instance'));
+		console.note('note, default color new `orange`');
 		console.time('time');
 		console.debug('debug');
 		console.header('This should be underline');

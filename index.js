@@ -3,7 +3,6 @@
 /* jshint -W030 */
 /* jshint -W098 */
 
-'use strict';
 
 var VERSION      = require('./package.json').version;
 
@@ -23,6 +22,7 @@ var _            = require('lodash');
 _.mixin(require('lodash-deep'));
 
 var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
+var COLOR_ORANGE = "\033[38;5;214m";
 
 // SETUP DEFAULT OPTIONS
 // =============================================================================
@@ -81,7 +81,7 @@ function notify(style, before, message, after, data) {
       variable = chalk.red.bold;
       break;
     case "note":
-      text     = chalk.gray;
+      text     = COLOR_ORANGE;
       variable = chalk.white;
       break;
     case "time":
@@ -118,7 +118,11 @@ function notify(style, before, message, after, data) {
     if (i%2) {
       result += variable(_.deepGet(data, tokens[i]) || '');
     } else {
-      result += text(tokens[i] || '');
+      if ( text === COLOR_ORANGE) {
+        result = text + tokens[i];
+      } else {
+        result += text(tokens[i] || '');
+      }
     }
   }
 
