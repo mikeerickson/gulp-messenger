@@ -389,7 +389,13 @@ function Msg(style) {
 
 }
 
+
 module.exports = {
+  orange:     function(msg) {
+    if( !is.null(msg) )
+      return COLOR_ORANGE + msg;
+    return COLOR_ORANGE;
+  },
   init:       init(),
   setOptions: setOptions(),
   info:       new Msg('info'),

@@ -6,6 +6,10 @@
 
 ## Changelog
   
+- 0.11.9
+    - Repurposed msg.note method to use default color of orange (color constant added in 0.10.0)
+      msg.note('This will appear in orange');
+
 - 0.10.0
     - Added new `orange` color which is default color for console.note routing
     - If you wish to use orange in any other output, the correct ASCI command to use
