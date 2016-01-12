@@ -23,6 +23,7 @@ _.mixin(require('lodash-deep'));
 
 var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
 var COLOR_ORANGE = "\033[38;5;214m";
+var COLOR_RESET  = "\033[m";
 
 // SETUP DEFAULT OPTIONS
 // =============================================================================
@@ -119,7 +120,7 @@ function notify(style, before, message, after, data) {
       result += variable(_.deepGet(data, tokens[i]) || '');
     } else {
       if ( text === COLOR_ORANGE) {
-        result = text + tokens[i];
+        result = text + tokens[i] + COLOR_RESET;
       } else {
         result += text(tokens[i] || '');
       }
@@ -392,9 +393,10 @@ function Msg(style) {
 
 module.exports = {
   orange:     function(msg) {
-    if( !is.null(msg) )
-      return COLOR_ORANGE + msg;
+    if( !is.undefined(msg) )
+      return COLOR_ORANGE + msg + COLOR_RESET;
     return COLOR_ORANGE;
+
   },
   init:       init(),
   setOptions: setOptions(),

@@ -109,10 +109,15 @@ describe('Test Using Console Override', function (done) {
 
   it('should work with all messenger methods', function (done) {
 
+    msg.header(msg.orange('Header'));
+
+    msg.log(msg.orange('This text should be orange'));
+
     msg.log('log');
     msg.info('info');
     msg.error('error');
     msg.success('success');
+    msg.note('note');
     msg.warning('warning');
     msg.warn("using `warn` shorthand");
     msg.note(chalk.gray('note, color supplied by `Chalk` instance'));

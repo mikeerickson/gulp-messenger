@@ -6,6 +6,9 @@
 
 ## Changelog
   
+- 0.11.1
+    - Fixed msg.note (ORANGE) color output to properly close color buffer when msg.note output displayed
+  
 - 0.11.9
     - Repurposed msg.note method to use default color of orange (color constant added in 0.10.0)
       msg.note('This will appear in orange');
@@ -15,7 +18,8 @@
     - If you wish to use orange in any other output, the correct ASCI command to use
 
       var COLOR_ORANGE = "\033[38;5;214m";
-      msg.log(COLOR_ORANGE + 'Hello World!');
+      var COLOR_RESET  = "\033[m";
+      msg.log(COLOR_ORANGE + 'Hello World!' + COLOR_RESET);
 
       * Note: The orange color is using 256 palette so it may not appear identical across !terminals
       * I have tested on OSX, Windows, CentOS 6/7 and Ubuntu 12/14
