@@ -21,24 +21,26 @@ var _            = require('lodash');
 
 _.mixin(require('lodash-deep'));
 
-var VALUE_REGEXP = /<%=\s*([^\s]+)\s*%>/g;
-var COLOR_ORANGE = "\033[38;5;214m";
-var COLOR_RESET  = "\033[m";
+var VALUE_REGEXP        = /<%=\s*([^\s]+)\s*%>/g;
+var COLOR_ORANGE        = "\033[38;5;214m";
+var COLOR_RESET         = "\033[m";
+var COLOR_CODES_REGEXP  = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
 
 // SETUP DEFAULT OPTIONS
 // =============================================================================
 
 var defOptions = {
-  logToFile:         false,
-  logToConsole:      true,
-  logPath:           'logs/',
-  logFile:           'app.log',
-  timestamp:         false,
-  rotateLog:         false,
-  boldVariables:     true,
-  showPipeFile:      true,
-  useDumpForObjects: true,
-  lineLength:        80
+  logToFile:          false,
+  logToConsole:       true,
+  logTimestampFormat: 'YYYY-MM-DD HH:mm:ss Z',
+  logPath:            'logs/',
+  logFile:            'app.log',
+  timestamp:          false,
+  rotateLog:          false,
+  boldVariables:      true,
+  showPipeFile:       true,
+  useDumpForObjects:  true,
+  lineLength:         80
 };
 
 
@@ -46,7 +48,7 @@ var defOptions = {
 // =============================================================================
 // Initialize logger, additional settings will be created in `init` method
 
-var logger = new (winston.Logger)({ level: 'debug'});
+var logger = new (winston.Logger)({ level: 'debug' });
 
 function notify(style, before, message, after, data) {
 
@@ -143,13 +145,13 @@ function notify(style, before, message, after, data) {
     if (( defOptions.logToConsole ) && ( style !== 'line')){
       if ( defOptions.timestamp || (style === 'time')) {
         if ( style === 'time') {
-          console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + hCurrentTime);
+          console.log('[' + chalk.grey(hCurrentTime) + '] ' + hCurrentTime);
         } else {
           if ( result ) {
             if( Object.keys(arguments[0]).length === 2 ) {
-              console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + result, arguments[0]);
+              console.log('[' + chalk.grey(hCurrentTime) + '] ' + result, arguments[0]);
             } else {
-              console.log('[' + chalk.grey.dim(hCurrentTime) + '] ' + result);
+              console.log('[' + chalk.grey(hCurrentTime) + '] ' + result);
             }
           }
         }
@@ -186,42 +188,43 @@ function notify(style, before, message, after, data) {
   }
 
   function logToFile(style, result) {
-    switch (style) {
-      case 'error':
-        (defOptions.logToFile) ? logger.error(result) : '';
-        break;
-      case 'warning':
-        (defOptions.logToFile) ? logger.warn(result) : '';
-        break;
-      case 'info':
-      case 'log':
-        (defOptions.logToFile) ? logger.info(result) : '';
-        break;
-      case 'success':
-        (defOptions.logToFile) ? logger.info(result) : '';
-        break;
-      case 'time':
-        (defOptions.logToFile) ? logger.info(result) : '';
-        break;
-      case 'debug':
-        (defOptions.logToFile) ? logger.log('debug', result) : '';
-        break;
-      case 'line':
-        (defOptions.logToFile) ? logger.log('log', result) : '';
-        break;
-      case "header":
-        (defOptions.logToFile) ? logger.log('log', result) : '';
-        break;
-      case 'default':
-        (defOptions.logToFile) ? logger.info(result) : '';
-        break;
+
+    // don't bother logging if we have no message
+    if ( result.length === 0 ) return;
+
+    // strip out all the color codes, etc. from message before logging
+    var msg = result.replace(COLOR_CODES_REGEXP,'');
+
+    // secondary check to make sure we have logging enabled
+
+
+    if (defOptions.logToFile) {
+      switch (style) {
+        case 'error':
+          logger.error(msg); break;
+        case 'warning':
+        case 'warn':
+          logger.warn(msg); break;
+        case 'success':
+          logger.info(msg); break;
+        case 'debug':
+          logger.log('debug', msg); break;
+        case 'note':
+        case 'info':
+        case 'log':
+        case 'default':
+          logger.info(msg); break;
+      }
     }
+
   }
 
   setLine(before);
   setConsole(data);
   setLine(after);
-  logToFile(style, result);
+
+  // don't bother logging if it is disabled, save some processor fumes
+  (defOptions.logToFile) ? logToFile(style, result) : '';
 
 }
 
@@ -299,7 +302,7 @@ function msg(style, useFlush) {
         args.data.duration      = prettyHrtime(process.hrtime(start));
         args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
 
-        // gulp pipeline specifc
+        // gulp pipeline specific
         defOptions.timestamp = true; // timestamp always true when in pipeline
         args.data = {};              // no data available in gulp pipeline
 
@@ -337,11 +340,21 @@ function init(options) {
 
     defOptions.logFilename = defOptions.logPath + defOptions.logFile;
     if ( defOptions.rotateLog ) {
-      logger.add(winston.transports.DailyRotateFile,{filename: defOptions.logFilename});
+      logger.add(winston.transports.DailyRotateFile,{
+        filename: defOptions.logFilename,
+        timestamp: function() {
+          return moment().format(defOptions.logTimestampFormat);
+        }
+      });
     } else {
-      if( !added ) {
+      if( ! added ) {
         added = true;
-        logger.add(winston.transports.File,{filename: defOptions.logFilename});
+        logger.add(winston.transports.File,{
+          filename: defOptions.logFilename,
+          timestamp: function() {
+            return moment().format(defOptions.logTimestampFormat);
+          }
+        });
       }
     }
     defOptions.logInitialized = true;
@@ -390,13 +403,11 @@ function Msg(style) {
 
 }
 
-
 module.exports = {
-  orange:     function(msg) {
+  orange: function(msg) {
     if( !is.undefined(msg) )
       return COLOR_ORANGE + msg + COLOR_RESET;
     return COLOR_ORANGE;
-
   },
   init:       init(),
   setOptions: setOptions(),
