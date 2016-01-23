@@ -51,14 +51,15 @@ Default Options (supplied to `init` method)
 
 ```js
 var defOptions = {
-    logToFile:     false,
-    logToConsole:  true,
-    logPath:       'logs/',
-    logFile:       'app.log',
-    timestamp:     false,
-    rotateLog:     false,
-    boldVariables: true, 
-    useDumpForObjects: true
+    logToFile:          false,
+    logTimestampFormat: 'YYYY-MM-DD HH:mm:ss Z',
+    logToConsole:       true,
+    logPath:            'logs/',
+    logFile:            'app.log',
+    timestamp:          false,
+    rotateLog:          false,
+    boldVariables:      true, 
+    useDumpForObjects:  true
 };
 
 logToFile (default: false)
@@ -66,6 +67,9 @@ logToFile (default: false)
 
 logToConsole (default: true)
 - will log message to console 
+
+logTimestampFormat (default: YYYY-MM-DD HH:mm:ss Z)
+- when logging to file, uses momentjs formats
 
 logPath (default: 'logs/' at root level)
 - desired path where log files will be stored 

@@ -5,7 +5,10 @@
 
 
 ## Changelog
-  
+- 0.12.0
+    - Added `logTimestampFormat` option, accepts momentjs format
+    - Default logTimestampFormat ( YYYY-MM-DD HH:mm:ss Z)
+
 - 0.11.1
     - Fixed msg.note (ORANGE) color output to properly close color buffer when msg.note output displayed
   

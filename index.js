@@ -189,15 +189,16 @@ function notify(style, before, message, after, data) {
 
   function logToFile(style, result) {
 
+    // make sure we received text, otherwise bail
+    if ( ! is.string(result) ) return;
+
     // don't bother logging if we have no message
-    if ( result.length === 0 ) return;
+    if ( result.length === 0  ) return;
 
     // strip out all the color codes, etc. from message before logging
     var msg = result.replace(COLOR_CODES_REGEXP,'');
 
     // secondary check to make sure we have logging enabled
-
-
     if (defOptions.logToFile) {
       switch (style) {
         case 'error':
