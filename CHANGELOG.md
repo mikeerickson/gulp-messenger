@@ -5,6 +5,9 @@
 
 
 ## Changelog
+- 0.13.0
+    - Added `strict mode` check before enabling orange
+
 - 0.12.0
     - Added `logTimestampFormat` option, accepts momentjs format
     - Default logTimestampFormat ( YYYY-MM-DD HH:mm:ss Z)

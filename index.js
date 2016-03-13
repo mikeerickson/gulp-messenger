@@ -1,8 +1,20 @@
+//  GULP MESSENGER
+// =============================================================================
+
+/*global require*/
 /*global require*/
 /*global process*/
 /* jshint -W030 */
 /* jshint -W098 */
+/* jshint -W198 */
+/* jshint -W003 */
 
+
+/* jshint strict: false */
+//"use strict";
+
+// this is required to support .orange color
+// eventually want to restore "use strict" waiting on chalk
 
 var VERSION      = require('./package.json').version;
 
@@ -21,10 +33,22 @@ var _            = require('lodash');
 
 _.mixin(require('lodash-deep'));
 
+
+// MODULE CONSTANTS
+// =============================================================================
+
 var VALUE_REGEXP        = /<%=\s*([^\s]+)\s*%>/g;
-var COLOR_ORANGE        = "\033[38;5;214m";
 var COLOR_RESET         = "\033[m";
+var COLOR_ORANGE        = chalk.red();
 var COLOR_CODES_REGEXP  = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
+
+if(! isStrictMode() ) {
+  COLOR_ORANGE          = "\033[38;5;214m";
+}
+
+function isStrictMode() {
+  return (typeof this == 'undefined');
+}
 
 // SETUP DEFAULT OPTIONS
 // =============================================================================
@@ -50,13 +74,205 @@ var defOptions = {
 
 var logger = new (winston.Logger)({ level: 'debug' });
 
+// MODULE DEFINITION (used by module.exports below)
+// =============================================================================
+
+var messenger = {
+  orange: function(msg) {
+    if( !is.undefined(msg) ) {
+      return COLOR_ORANGE + msg + COLOR_RESET;
+    }
+    return COLOR_ORANGE;
+  },
+  init:       init(),
+  setOptions: setOptions(),
+  info:       new Message('info'),
+  log:        new Message('info'),
+  success:    new Message('success'),
+  warning:    new Message('warning'),
+  warn:       new Message('warning'),
+  error:      new Message('error'),
+  note:       new Message('note'),
+  time:       new Message('time'),
+  debug:      new Message('debug'),
+  line:       new Message('line'),
+  header:     new Message('header'),
+  dir:        function() {
+    Purdy.apply(Purdy, arguments);
+  },
+  purdy:      function() {
+    Purdy.apply(Purdy, arguments);
+  },
+  dump:       function() {
+    Purdy.apply(Purdy, arguments);
+  },
+  version:    function() {
+    return VERSION;
+  },
+  chalkline:  chalkline,
+  chalk:      chalk,
+  colors:     chalk,
+  flush: {
+    info:    message('info', true),
+    log:     message('info', true),
+    success: message('success', true),
+    warning: message('warning', true),
+    warn:    message('warning', true),
+    error:   message('error', true),
+    note:    message('note', true),
+    time:    message('time', true),
+    debug:   message('debug', true),
+    line:    message('line', true),
+    header:  message('header',true),
+    chalkline: chalkline,
+    dir: function() {
+      Purdy.apply(Purdy, arguments);
+    },
+    purdy: function() {
+      Purdy.apply(Purdy, arguments);
+    },
+    dump: function(){
+      Purdy.apply(Purdy, arguments);
+    }
+  },
+  Info:       new Message('info'),
+  Log:        new Message('info'),
+  Success:    new Message('success'),
+  Warning:    new Message('warning'),
+  Warn:       new Message('warning'),
+  Error:      new Message('error'),
+  Note:       new Message('note'),
+  Time:       new Message('time'),
+  Debug:      new Message('debug'),
+  Line:       new Message('line'),
+  Header:     new Message('header'),
+  Purdy:     function() {
+    Purdy.apply(Purdy, arguments);
+  },
+  Dump:      function() {
+    Purdy.apply(Purdy, arguments);
+  },
+  Version:   function() {
+    return VERSION;
+  }
+};
+
+// MODULE ENTRY POINTS
+// =============================================================================
+
+function message(style, useFlush) {
+  var totalStart    = process.hrtime();
+
+  return function() {
+    var args     = getArgs(arguments);
+    var lastFile = {};
+    var start    = process.hrtime();
+
+    function transform(file, enc, callback) {
+      lastFile = file;
+
+      if (!useFlush) {
+        args.data.file          = _.clone(file);
+        args.data.file.relative = path.relative(file.base, file.path);
+        args.data.file.basename = path.basename(file.path);
+        args.data.duration      = prettyHrtime(process.hrtime(start));
+        args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
+        notify(style, args.before, args.message, args.after, args.data);
+      }
+      callback(null, file);
+    }
+
+    function flush(callback) {
+      if (useFlush) {
+
+        // not sure how this is going to be used as we are clearing .data below
+        args.data.file          = _.clone(lastFile);
+        args.data.duration      = prettyHrtime(process.hrtime(start));
+        args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
+
+        // gulp pipeline specific
+        defOptions.timestamp = true; // timestamp always true when in pipeline
+        args.data = {};              // no data available in gulp pipeline
+
+        // this is only appropriate adjustment to message (to include the filename)
+        var msg = args.message;
+        if (defOptions.showPipeFile) {
+          msg += ' [' + lastFile.relative + '] ';
+        }
+
+        notify(style, args.before, msg, args.after, args.data);
+      }
+      callback();
+    }
+
+    return through.obj(transform, flush);
+  };
+}
+
+function Message(style) {
+  return function() {
+    var args = getArgs(arguments);
+    if((is.object(args.message)) && (arguments.length === 1) && (defOptions.useDumpForObjects)) {
+      /* jshint -W064 */
+      Purdy(args.message);
+    } else {
+      notify(style, args.before, args.message, args.after, args.data);
+    }
+  };
+
+}
+
+
+// MODULE PRIVATE METHOD
+// =============================================================================
+
+function init(options) {
+
+  var added = false;
+
+  return function(options) {
+
+    if(is.not.undefined(options)) {
+      defOptions = _.defaults(options, defOptions);
+    }
+
+    if(defOptions.logPath[defOptions.logPath.length] !== '/') {
+      defOptions.logPath += '/';
+    }
+
+    // create log path if it doesn't already exist
+    mkdirp(defOptions.logPath);
+
+    defOptions.logFilename = defOptions.logPath + defOptions.logFile;
+    if ( defOptions.rotateLog ) {
+      logger.add(winston.transports.DailyRotateFile,{
+        filename: defOptions.logFilename,
+        timestamp: function() {
+          return moment().format(defOptions.logTimestampFormat);
+        }
+      });
+    } else {
+      if( ! added ) {
+        added = true;
+        logger.add(winston.transports.File,{
+          filename: defOptions.logFilename,
+          timestamp: function() {
+            return moment().format(defOptions.logTimestampFormat);
+          }
+        });
+      }
+    }
+    defOptions.logInitialized = true;
+  };
+}
+
 function notify(style, before, message, after, data) {
 
   var text, variable;
   var result = '';
   var tokens;
 
-// 2015.05.28 - added bounds check, exposed when adding *.line() routine
+  // 2015.05.28 - added bounds check, exposed when adding *.line() routine
   if( is.undefined(message) ) { message = ''; }
 
   if ( (is.not.object(message)) && (is.not.number(message)) ) {
@@ -164,7 +380,7 @@ function notify(style, before, message, after, data) {
             console.log(result);
           }
         } else {
-          console.log(result, callData)
+          console.log(result, callData);
         }
       }
     }
@@ -190,10 +406,10 @@ function notify(style, before, message, after, data) {
   function logToFile(style, result) {
 
     // make sure we received text, otherwise bail
-    if ( ! is.string(result) ) return;
+    if ( ! is.string(result) ) { return; }
 
     // don't bother logging if we have no message
-    if ( result.length === 0  ) return;
+    if ( result.length === 0  ) { return; }
 
     // strip out all the color codes, etc. from message before logging
     var msg = result.replace(COLOR_CODES_REGEXP,'');
@@ -273,95 +489,6 @@ function getArgs(args) {
   return result;
 }
 
-function msg(style, useFlush) {
-  var totalStart    = process.hrtime();
-
-  return function() {
-    var args     = getArgs(arguments);
-    var lastFile = {};
-    var start    = process.hrtime();
-
-    function transform(file, enc, callback) {
-      lastFile = file;
-
-      if (!useFlush) {
-        args.data.file          = _.clone(file);
-        args.data.file.relative = path.relative(file.base, file.path);
-        args.data.file.basename = path.basename(file.path);
-        args.data.duration      = prettyHrtime(process.hrtime(start));
-        args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
-        notify(style, args.before, args.message, args.after, args.data);
-      }
-      callback(null, file);
-    }
-
-    function flush(callback) {
-      if (useFlush) {
-
-        // not sure how this is going to be used as we are clearing .data below
-        args.data.file          = _.clone(lastFile);
-        args.data.duration      = prettyHrtime(process.hrtime(start));
-        args.data.totalDuration = prettyHrtime(process.hrtime(totalStart));
-
-        // gulp pipeline specific
-        defOptions.timestamp = true; // timestamp always true when in pipeline
-        args.data = {};              // no data available in gulp pipeline
-
-        // this is only appropriate adjustment to message (to include the filename)
-        var msg = args.message;
-        if (defOptions.showPipeFile) {
-          msg += ' [' + lastFile.relative + '] ';
-        }
-
-        notify(style, args.before, msg, args.after, args.data);
-      }
-      callback();
-    }
-
-    return through.obj(transform, flush);
-  };
-}
-
-function init(options) {
-
-  var added = false;
-
-  return function(options) {
-
-    if(is.not.undefined(options)) {
-      defOptions = _.defaults(options, defOptions);
-    }
-
-    if(defOptions.logPath[defOptions.logPath.length] !== '/') {
-      defOptions.logPath += '/';
-    }
-
-    // create log path if it doesn't already exist
-    mkdirp(defOptions.logPath);
-
-    defOptions.logFilename = defOptions.logPath + defOptions.logFile;
-    if ( defOptions.rotateLog ) {
-      logger.add(winston.transports.DailyRotateFile,{
-        filename: defOptions.logFilename,
-        timestamp: function() {
-          return moment().format(defOptions.logTimestampFormat);
-        }
-      });
-    } else {
-      if( ! added ) {
-        added = true;
-        logger.add(winston.transports.File,{
-          filename: defOptions.logFilename,
-          timestamp: function() {
-            return moment().format(defOptions.logTimestampFormat);
-          }
-        });
-      }
-    }
-    defOptions.logInitialized = true;
-  };
-}
-
 function setOptions(options) {
 
   var added = true;
@@ -392,93 +519,7 @@ function setOptions(options) {
   };
 }
 
-function Msg(style) {
-  return function() {
-    var args = getArgs(arguments);
-    if((is.object(args.message)) && (arguments.length === 1) && (defOptions.useDumpForObjects)) {
-      Purdy(args.message);
-    } else {
-      notify(style, args.before, args.message, args.after, args.data);
-    }
-  };
+// MODULE EXPORT
+// =============================================================================
 
-}
-
-module.exports = {
-  orange: function(msg) {
-    if( !is.undefined(msg) )
-      return COLOR_ORANGE + msg + COLOR_RESET;
-    return COLOR_ORANGE;
-  },
-  init:       init(),
-  setOptions: setOptions(),
-  info:       new Msg('info'),
-  log:        new Msg('info'),
-  success:    new Msg('success'),
-  warning:    new Msg('warning'),
-  warn:       new Msg('warning'),
-  error:      new Msg('error'),
-  note:       new Msg('note'),
-  time:       new Msg('time'),
-  debug:      new Msg('debug'),
-  line:       new Msg('line'),
-  header:     new Msg('header'),
-  dir:        function() {
-    Purdy.apply(Purdy, arguments);
-  },
-  purdy:      function() {
-    Purdy.apply(Purdy, arguments);
-  },
-  dump:       function() {
-    Purdy.apply(Purdy, arguments);
-  },
-  version:    function() {
-    return VERSION;
-  },
-  chalkline:  chalkline,
-  chalk:      chalk,
-  colors:     chalk,
-  flush: {
-    info:    msg('info', true),
-    log:     msg('info', true),
-    success: msg('success', true),
-    warning: msg('warning', true),
-    warn:    msg('warning', true),
-    error:   msg('error', true),
-    note:    msg('note', true),
-    time:    msg('time', true),
-    debug:   msg('debug', true),
-    line:    msg('line', true),
-    header:  msg('header',true),
-    chalkline: chalkline,
-    dir: function() {
-      Purdy.apply(Purdy, arguments);
-    },
-    purdy: function() {
-      Purdy.apply(Purdy, arguments);
-    },
-    dump: function(){
-      Purdy.apply(Purdy, arguments);
-    }
-  },
-  Info:       new Msg('info'),
-  Log:        new Msg('info'),
-  Success:    new Msg('success'),
-  Warning:    new Msg('warning'),
-  Warn:       new Msg('warning'),
-  Error:      new Msg('error'),
-  Note:       new Msg('note'),
-  Time:       new Msg('time'),
-  Debug:      new Msg('debug'),
-  Line:       new Msg('line'),
-  Header:     new Msg('header'),
-  Purdy:     function() {
-    Purdy.apply(Purdy, arguments);
-  },
-  Dump:      function() {
-    Purdy.apply(Purdy, arguments);
-  },
-  Version:   function() {
-    return VERSION;
-  }
-};
+module.exports = messenger;

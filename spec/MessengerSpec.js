@@ -17,10 +17,7 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
   beforeEach(function () {
     msg.init({
-      logToFile: true,
       timestamp: false,
-      logPath: 'spec/logs',
-      logFile: 'myLog.log',
       boldVariables: true
     });
   });

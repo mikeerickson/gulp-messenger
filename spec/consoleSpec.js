@@ -7,14 +7,12 @@ var chalk   = require('chalk');
 var kids   = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
 var user   = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
-console.note('ConsoleSpec.js - default note output');
-
 describe('Test Using Console Override', function(done) {
 
 	it('should work with all messenger methods',function(done){
 
 		console.log('log');
-		console.log('test my conbsole');
+		console.log('test my console');
 		console.info('info');
 		console.error('error');
 		console.success('success');
