@@ -38,12 +38,14 @@ _.mixin(require('lodash-deep'));
 // =============================================================================
 
 var VALUE_REGEXP        = /<%=\s*([^\s]+)\s*%>/g;
-var COLOR_RESET         = "\033[m";
 var COLOR_ORANGE        = chalk.red();
+var COLOR_RESET         = chalk.white();
 var COLOR_CODES_REGEXP  = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
 
 if(! isStrictMode() ) {
   COLOR_ORANGE          = "\033[38;5;214m";
+  COLOR_RESET           = "\033[m";
+
 }
 
 function isStrictMode() {
