@@ -5,6 +5,7 @@
 /*global require*/
 /*global process*/
 /* jshint -W030 */
+/* jshint -W040 */
 /* jshint -W098 */
 /* jshint -W198 */
 /* jshint -W003 */
@@ -26,13 +27,12 @@ var path         = require("path");
 var prettyHrtime = require('pretty-hrtime');
 var through      = require('through2');
 var winston      = require('winston');
-var chalkline    = require('chalkline');
+var chalkline    = require('./lib/chalkline');
 var Purdy        = require('purdy');
 
 var _            = require('lodash');
 
 _.mixin(require('lodash-deep'));
-
 
 // MODULE CONSTANTS
 // =============================================================================
@@ -45,11 +45,10 @@ var COLOR_CODES_REGEXP  = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)
 if(! isStrictMode() ) {
   COLOR_ORANGE          = "\033[38;5;214m";
   COLOR_RESET           = "\033[m";
-
 }
 
 function isStrictMode() {
-  return (typeof this == 'undefined');
+  return (typeof this === 'undefined');
 }
 
 // SETUP DEFAULT OPTIONS
@@ -66,8 +65,15 @@ var defOptions = {
   boldVariables:      true,
   showPipeFile:       true,
   useDumpForObjects:  true,
-  lineLength:         80
+  lineLength:         80,
+  chalklineBox:       '\u2584' // '\u2588'
 };
+
+// unicode blocks -- http://graphemica.com/blocks/block-elements
+
+// SETUP CHALKLINE
+
+chalkline.options({block: defOptions.chalklineBox});
 
 
 // SETUP WINSTON
@@ -265,6 +271,10 @@ function init(options) {
       }
     }
     defOptions.logInitialized = true;
+
+    // update chalkine in the event supplied block or length
+    chalkline.options({block: defOptions.chalklineBox});
+
   };
 }
 

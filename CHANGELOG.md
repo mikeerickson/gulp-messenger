@@ -3,8 +3,15 @@
 
 [![Build Status](https://travis-ci.org/mikeerickson/gulp-messenger.svg?branch=master)](https://travis-ci.org/mikeerickson/gulp-messenger) [![Dependency Status](https://gemnasium.com/mikeerickson/gulp-messenger.svg)](https://gemnasium.com/mikeerickson/gulp-messenger) [![npm](https://img.shields.io/npm/dm/localeval.svg)]() [![npm](https://img.shields.io/badge/mocha-passed-green.svg)]()
 
-
 ## Changelog
+- 0.14.0
+  - Integrated chalkline source as lib instead of npm module
+  - Added new option `chalklineBox` (default value `\u2584`)
+    Example:
+    `msg.init({chalklineBox: '\u2591'})`
+  - Updated most of the dependencies (some need to stay at current version for compatability)
+    - lodash-deep@1.6.0 
+  
 - 0.13.0
     - Added `strict mode` check before enabling orange
 
