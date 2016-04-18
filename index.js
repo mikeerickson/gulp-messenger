@@ -29,6 +29,7 @@ var through      = require('through2');
 var winston      = require('winston');
 var chalkline    = require('./lib/chalkline');
 var Purdy        = require('purdy');
+var bowser       = require('bowser');
 
 var _            = require('lodash');
 
@@ -70,9 +71,7 @@ var defOptions = {
 };
 
 // unicode blocks -- http://graphemica.com/blocks/block-elements
-
 // SETUP CHALKLINE
-
 chalkline.options({block: defOptions.chalklineBox});
 
 
@@ -80,7 +79,10 @@ chalkline.options({block: defOptions.chalklineBox});
 // =============================================================================
 // Initialize logger, additional settings will be created in `init` method
 
-var logger = new (winston.Logger)({ level: 'debug' });
+var logger = null;
+if ( bowser.name.length === 0) {
+  var logger = new (winston.Logger)({level: 'debug'});
+}
 
 // MODULE DEFINITION (used by module.exports below)
 // =============================================================================
@@ -240,6 +242,8 @@ function init(options) {
 
   return function(options) {
 
+    var isBrowser = bowser.name.length > 0;
+
     if(is.not.undefined(options)) {
       defOptions = _.defaults(options, defOptions);
     }
@@ -248,28 +252,34 @@ function init(options) {
       defOptions.logPath += '/';
     }
 
-    // create log path if it doesn't already exist
-    mkdirp(defOptions.logPath);
+    if(! isBrowser) {
+      // create log path if it doesn't already exist
+      mkdirp(defOptions.logPath);
 
-    defOptions.logFilename = defOptions.logPath + defOptions.logFile;
-    if ( defOptions.rotateLog ) {
-      logger.add(winston.transports.DailyRotateFile,{
-        filename: defOptions.logFilename,
-        timestamp: function() {
-          return moment().format(defOptions.logTimestampFormat);
-        }
-      });
-    } else {
-      if( ! added ) {
-        added = true;
-        logger.add(winston.transports.File,{
+      defOptions.logFilename = defOptions.logPath + defOptions.logFile;
+      if ( defOptions.rotateLog ) {
+        logger.add(winston.transports.DailyRotateFile,{
           filename: defOptions.logFilename,
           timestamp: function() {
             return moment().format(defOptions.logTimestampFormat);
           }
         });
+      } else {
+        if( ! added ) {
+          added = true;
+          logger.add(winston.transports.File,{
+            filename: defOptions.logFilename,
+            timestamp: function() {
+              return moment().format(defOptions.logTimestampFormat);
+            }
+          });
+        }
       }
+    } else {
+      console.warn('Logging Disabled On Browser');
     }
+
+    // only do this once regardless so outside browser check
     defOptions.logInitialized = true;
 
     // update chalkine in the event supplied block or length
