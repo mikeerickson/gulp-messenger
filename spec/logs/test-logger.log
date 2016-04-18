@@ -463,3 +463,12 @@
 {"level":"info","message":"----- messenger: log","timestamp":"2016-04-16 15:54:39 -07:00"}
 {"level":"info","message":"\n","timestamp":"2016-04-16 15:54:39 -07:00"}
 {"level":"info","message":"test line","timestamp":"2016-04-16 15:54:40 -07:00"}
+{"level":"error","message":"----- messenger: error","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"info","message":"----- messenger: success","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"warn","message":"----- messenger: warn","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"warn","message":"----- messenger: warning","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"info","message":"----- messenger: note","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"debug","message":"----- messenger: debug","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"info","message":"----- messenger: log","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"info","message":"\n","timestamp":"2016-04-17 18:18:26 -07:00"}
+{"level":"info","message":"test line","timestamp":"2016-04-17 18:18:27 -07:00"}

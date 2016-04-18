@@ -26,10 +26,15 @@ var moment       = require('moment');
 var path         = require("path");
 var prettyHrtime = require('pretty-hrtime');
 var through      = require('through2');
-var winston      = require('winston');
 var chalkline    = require('./lib/chalkline');
 var Purdy        = require('purdy');
 var bowser       = require('bowser');
+
+var winston      = null;
+
+if(bowser.name.length === 0) {
+  var winston      = require('winston');
+}
 
 var _            = require('lodash');
 
