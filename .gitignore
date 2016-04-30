@@ -9,3 +9,5 @@ todo.json
 /sandbox/
 .editorconfig
 .jslintrc
+/spec/logs/
+

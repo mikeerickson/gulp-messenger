@@ -427,7 +427,14 @@ function notify(style, before, message, after, data) {
     for (var i = 0; i < defOptions.lineLength; i++) {
       result += line;
     }
-    if ( defOptions.logToConsole ) { console.log(text(result)); }
+    if ( defOptions.logToConsole ) {
+      // we have to handle orange separately
+      if(typeof(text) === 'function') {
+        console.log(text(result));
+      } else {
+        console.log(COLOR_ORANGE + result + COLOR_RESET);
+      }
+    }
   }
 
   function logToFile(style, result) {
