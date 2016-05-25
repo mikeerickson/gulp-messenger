@@ -29,6 +29,7 @@ var through      = require('through2');
 var chalkline    = require('./lib/chalkline');
 var Purdy        = require('purdy');
 var bowser       = require('bowser');
+var sprintf      = require("sprintf-js").sprintf;
 
 var winston      = null;
 
@@ -302,6 +303,8 @@ function notify(style, before, message, after, data) {
   // 2015.05.28 - added bounds check, exposed when adding *.line() routine
   if( is.undefined(message) ) { message = ''; }
 
+  debugger;
+  
   if ( (is.not.object(message)) && (is.not.number(message)) ) {
     tokens = message.split(VALUE_REGEXP);
   } else {
@@ -378,7 +381,7 @@ function notify(style, before, message, after, data) {
   }
 
   function setConsole(data) {
-
+   
     var callData = {};
     if ( is.not.undefined(data) ) {
       callData = data;
@@ -402,7 +405,10 @@ function notify(style, before, message, after, data) {
 
         if ( is.object(callData)) {
           if ( Object.keys(callData).length > 0 ) {
-            console.log(result, callData);
+            if(is.array(callData)) {
+              callData.splice(0,0,result);
+              console.log.apply(console, callData);
+            }
           } else {
             console.log(result);
           }
@@ -481,6 +487,23 @@ function notify(style, before, message, after, data) {
 
 function getArgs(args) {
 
+  var msg = '';
+  if(args.length > 0 ) {
+    var msg = args[0];
+    if(is.string(msg)) {
+      if ( msg.indexOf('%s') > 0 ) {
+        // we are processing via sprintf
+        var params = Array.prototype.slice.call(args);
+        params.shift();
+        return {
+          before: '',
+          message: msg,
+          after: '',
+          data: params
+        }
+      }
+    }
+  }
   var result = {
     before:  args[0],
     message: args[1],
