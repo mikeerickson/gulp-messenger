@@ -2,7 +2,8 @@
   "name": "gulp-messenger",
   "description": "Console and File Logger",
   "main": "index.js",
-  "version": "0.17.0",
+  "version": "0.18.0",
+  "reveal": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/mikeerickson/gulp-messenger"

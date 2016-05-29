@@ -4,7 +4,10 @@
 [![Build Status](https://travis-ci.org/mikeerickson/gulp-messenger.svg?branch=master)](https://travis-ci.org/mikeerickson/gulp-messenger) [![Dependency Status](https://gemnasium.com/mikeerickson/gulp-messenger.svg)](https://gemnasium.com/mikeerickson/gulp-messenger) [![npm](https://img.shields.io/npm/dm/localeval.svg)]() [![npm](https://img.shields.io/badge/mocha-passed-green.svg)]()
 
 ## Changelog
-  
+
+- 0.18.0
+  - Updated to `reveal` and viewable on `npmaddict.com`
+
 - 0.17.0
   - Add support for sprintf interpolation
   
