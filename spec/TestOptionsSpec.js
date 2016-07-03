@@ -30,4 +30,3 @@ describe('test `setOptions` method', function() {
 
 });
 
-

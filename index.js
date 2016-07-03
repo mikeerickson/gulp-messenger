@@ -102,6 +102,7 @@ var messenger = {
   },
   init:       init(),
   setOptions: setOptions(),
+  name:       'gulp-messenger',
   info:       new Message('info'),
   log:        new Message('info'),
   success:    new Message('success'),
@@ -304,7 +305,7 @@ function notify(style, before, message, after, data) {
   if( is.undefined(message) ) { message = ''; }
 
   debugger;
-  
+
   if ( (is.not.object(message)) && (is.not.number(message)) ) {
     tokens = message.split(VALUE_REGEXP);
   } else {
@@ -381,7 +382,7 @@ function notify(style, before, message, after, data) {
   }
 
   function setConsole(data) {
-   
+
     var callData = {};
     if ( is.not.undefined(data) ) {
       callData = data;

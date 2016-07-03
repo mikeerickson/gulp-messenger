@@ -8,6 +8,7 @@
 
 var msg = require('../index');
 var expect = require('chai').expect;
+var should = require('chai').should();
 var chalk = require('chalk');
 
 var kids = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
@@ -24,6 +25,12 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
   it("should return version", function (done) {
     msg.header(chalk.red(' *** Gulp-messenger version: ', msg.version()))
+    done();
+  });
+
+  it("should return module name", function(done){
+    var name = msg.name;
+    name.should.equal('gulp-messenger');
     done();
   });
 
