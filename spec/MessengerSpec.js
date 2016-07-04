@@ -6,10 +6,12 @@
 
 'use strict';
 
-var msg = require('../index');
+var msg    = require('../index');
 var expect = require('chai').expect;
 var should = require('chai').should();
-var chalk = require('chalk');
+var chalk  = require('chalk');
+var pkgInfo = require('../package');
+
 
 var kids = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
 var user = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
@@ -25,6 +27,9 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
   it("should return version", function (done) {
     msg.header(chalk.red(' *** Gulp-messenger version: ', msg.version()))
+    var version = msg.version();
+    var pkgVers = pkgInfo.version;
+    version.should.equal(pkgVers)
     done();
   });
 
