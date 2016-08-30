@@ -2,7 +2,6 @@
 // =============================================================================
 
 /*global require*/
-/*global require*/
 /*global process*/
 /* jshint -W030 */
 /* jshint -W040 */
