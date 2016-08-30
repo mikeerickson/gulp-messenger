@@ -62,7 +62,7 @@
     "jshint-summary": "0.4.0",
     "mocha": "^3.0.2",
     "mocha-sinon": "1.1.5",
-    "mochawesome": "1.5.1",
+    "mochawesome": "1.5.2",
     "path-exists": "^3.0.0",
     "phantomjs": "2.1.7",
     "require-dir": "^0.3.0",
