@@ -21,12 +21,12 @@ var chalk  = msg.chalk;
 var db = chalk.cyan.underline;
 var ib = chalk.yellow;
 
-describe(db('Gulp Messenger Logger Spec'), function() {
+describe(db('Gulp Messenger Logger Spec'), function () {
 
   var logData = '';
   var msgOptions = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     msgOptions = {
       logToFile: true,
       logPath:   'spec/logs',
@@ -36,11 +36,11 @@ describe(db('Gulp Messenger Logger Spec'), function() {
 
   });
 
-  afterEach(function(){
+  afterEach(function (){
     msg.log('\n'); // a little spacing between tests
   });
 
-  it(ib('should log each of the Messenger methods which display message'), function(done){
+  it(ib('should log each of the Messenger methods which display message'), function (done){
 
     var data = '';
 
@@ -56,9 +56,9 @@ describe(db('Gulp Messenger Logger Spec'), function() {
     fs.readFile(msgOptions.logFilename, 'utf8', function (err,data) {
       if (err) {
         // this will occur when the log file is created initially, need to pause and try again
-        setTimeout(function(){
+        setTimeout(function (){
           fs.readFile(msgOptions.logFilename, 'utf8', function (err,data) {
-            if(err) {
+            if (err) {
               return msg.error('Error Reading Log: ', err);
             }
           });
@@ -77,7 +77,7 @@ describe(db('Gulp Messenger Logger Spec'), function() {
 
   });
 
-  it(ib('should not log output when logToFile option is false'), function(done){
+  it(ib('should not log output when logToFile option is false'), function (done){
 
     msg.setOptions({logToFile: false});
 
@@ -88,9 +88,9 @@ describe(db('Gulp Messenger Logger Spec'), function() {
     fs.readFile(msgOptions.logFilename, 'utf8', function (err,data) {
       if (err) {
         // this will occur when the log file is created initially, need to pause and try again
-        setTimeout(function(){
+        setTimeout(function (){
           fs.readFile(msgOptions.logFilename, 'utf8', function (err,data) {
-            if(err) {
+            if (err) {
               return msg.error('Error Reading Log: ', err);
             }
           });

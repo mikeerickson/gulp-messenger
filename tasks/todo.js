@@ -10,7 +10,7 @@ var msg      = require('../index');
 msg.init({timestamp: true, logToFile: false});
 msg.chalkline.yellow();
 
-gulp.task('todo', function() {
+gulp.task('todo', function () {
 	return gulp.src(config.todo.src)
 		.pipe(todo())
 		.pipe(gulp.dest('./'))
@@ -27,7 +27,7 @@ gulp.task('todo:json', function () {
 		.pipe(gulp.dest('./'));
 });
 
-gulp.task('todo:reporters', function() {
+gulp.task('todo:reporters', function () {
 	gulp.src(config.todo.src)
 		.pipe(todo())
 		.pipe(gulp.dest('./'))

@@ -7,9 +7,9 @@ var chalk   = require('chalk');
 var kids   = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
 var user   = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
-describe('Test Using Console Override', function(done) {
+describe('Test Using Console Override', function (done) {
 
-	it('should work with all messenger methods',function(done){
+	it('should work with all messenger methods',function (done){
 
 		console.log('log');
 		console.log('test my console');
@@ -17,7 +17,7 @@ describe('Test Using Console Override', function(done) {
 		console.error('error');
 		console.success('success');
 		console.warning('warning');
-		console.warn("using `warn` shorthand");
+		console.warn('using \`warn\` shorthand');
 		console.note(chalk.magenta('note, color supplied by `Chalk` instance'));
 		console.note('note, default color new `orange`');
 		console.time('time');

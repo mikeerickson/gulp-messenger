@@ -2,7 +2,7 @@
   "name": "gulp-messenger",
   "description": "Console and File Logger",
   "main": "index.js",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "reveal": true,
   "repository": {
     "type": "git",
@@ -12,6 +12,13 @@
     "name": "codedungeon",
     "email": "codedungeon@gmail.com"
   },
+  "eslintConfig": {
+  "globals": {
+    "window": false,
+    "require": true,
+    "process": true
+  }
+},
   "keywords": [
     "gulpplugin",
     "notification",
@@ -70,7 +77,9 @@
     "sinon": "1.17.5"
   },
   "scripts": {
-    "test": "mocha spec"
+    "test": "mocha spec",
+    "eslint": "eslint \"./**/*.js\" --config .eslintrc.yml || true",
+    "lint": "npm run eslint"
   },
   "maintainers": [
     {

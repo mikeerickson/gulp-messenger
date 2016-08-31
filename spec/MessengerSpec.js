@@ -16,16 +16,16 @@ var pkgInfo = require('../package');
 var kids = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
 var user = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
-describe("Messenger (Console / Logger) for Browser and Server, including `gulp` pipeline support", function () {
+describe ('Messenger (Console / Logger) for Browser and Server, including `gulp` pipeline support', function () {
 
-  beforeEach(function () {
+  beforeEach (function () {
     msg.init({
       timestamp: false,
       boldVariables: true
     });
   });
 
-  it("should return version", function (done) {
+  it ('should return version', function (done) {
     msg.header(chalk.red(' *** Gulp-messenger version: ', msg.version()))
     var version = msg.version();
     var pkgVers = pkgInfo.version;
@@ -33,13 +33,13 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
     done();
   });
 
-  it("should return module name", function(done){
+  it('should return module name', function (done){
     var name = msg.name;
     name.should.equal('gulp-messenger');
     done();
   });
 
-  it("should interpolate string", function (done) {
+  it('should interpolate string', function (done) {
     msg.Info(user);
     msg.Success('Hello there <%= fname %> <%= lname %>:', user);
     msg.Success('These are our kids <%= kids %>', user);
@@ -47,14 +47,14 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
     done();
   });
 
-  it("should test all messenger routines", function (done) {
+  it('should test all messenger routines', function (done) {
 
     msg.Log('log');
     msg.Info('info');
     msg.Error('error');
     msg.Success('success');
     msg.Warning('warning');
-    msg.Warn("using `warn` shorthand");
+    msg.Warn('using `warn` shorthand');
     msg.Note(chalk.gray('note, color supplied by `Chalk` instance'));
     msg.Time('time');
     msg.Debug('debug');
@@ -91,22 +91,22 @@ describe("Messenger (Console / Logger) for Browser and Server, including `gulp` 
 
 });
 
-describe("Messenger Line Test", function () {
+describe('Messenger Line Test', function () {
 
-  it("should print lines before and after", function (done) {
+  it('should print lines before and after', function (done) {
     msg.Warn('=', 'Testing `Warn` message', '*');
     msg.Warning('=', 'This is from `Warning` routine', '*');
     expect(true).to.be.equal(true);
     done();
   });
 
-  it("should print lines before and after", function (done) {
+  it('should print lines before and after', function (done) {
     msg.Error('=', 'Now trying `Error containing `=` ');
     expect(true).to.be.equal(true);
     done();
   });
 
-  it("should print lines before and after", function (done) {
+  it('should print lines before and after', function (done) {
     msg.Success('', 'A `Success` line after this message containing `x` ', 'x');
     expect(true).to.be.equal(true);
     done();
@@ -128,7 +128,7 @@ describe('Test Using Console Override', function (done) {
     msg.success('success');
     msg.note('note');
     msg.warning('warning');
-    msg.warn("using `warn` shorthand");
+    msg.warn('using `warn` shorthand');
     msg.note(chalk.gray('note, color supplied by `Chalk` instance'));
     msg.time('time');
     msg.debug('debug');

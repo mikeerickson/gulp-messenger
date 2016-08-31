@@ -19,7 +19,7 @@ var args   = process.argv.slice(3);
 var openReport = args.indexOf('--open') >= 0 || (config.test.reporter.openReport);
 
 mkdirp('spec/logs', function (err) {
-	if (err) {msg.Error(err);}
+	if (err) { msg.Error(err); }
 });
 
 gulp.task('test:mocha', function () {
@@ -38,7 +38,8 @@ gulp.task('test:report', function () {
 				}
 				process.exit();
 			});
-	} else {
+	}
+  else {
 		msg.Error(' *** Mochawesome reporter not installed! *** ');
 		process.exit();
 	}
@@ -47,4 +48,3 @@ gulp.task('test:report', function () {
 
 // alias
 gulp.task('test',['test:mocha']);
-
