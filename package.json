@@ -2,7 +2,7 @@
   "name": "gulp-messenger",
   "description": "Console and File Logger",
   "main": "index.js",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "reveal": true,
   "repository": {
     "type": "git",
@@ -13,12 +13,12 @@
     "email": "codedungeon@gmail.com"
   },
   "eslintConfig": {
-  "globals": {
-    "window": false,
-    "require": true,
-    "process": true
-  }
-},
+    "globals": {
+      "window": false,
+      "require": true,
+      "process": true
+    }
+  },
   "keywords": [
     "gulpplugin",
     "notification",
@@ -68,8 +68,8 @@
     "install": "^0.8.1",
     "jshint-summary": "0.4.0",
     "mocha": "^3.0.2",
-    "mocha-sinon": "1.1.5",
-    "mochawesome": "1.5.1",
+    "mocha-sinon": "1.1.6",
+    "mochawesome": "1.5.2",
     "path-exists": "^3.0.0",
     "phantomjs": "2.1.7",
     "require-dir": "^0.3.0",
