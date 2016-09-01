@@ -1,19 +1,6 @@
 //  GULP MESSENGER
 // =============================================================================
 
-/*global require*/
-/*global require*/
-/*global process*/
-/* jshint -W030 */
-/* jshint -W040 */
-/* jshint -W098 */
-/* jshint -W198 */
-/* jshint -W003 */
-
-
-/* jshint strict: false */
-//"use strict";
-
 // this is required to support .orange color
 // eventually want to restore "use strict" waiting on chalk
 
@@ -49,10 +36,15 @@ var COLOR_ORANGE        = chalk.red();
 var COLOR_RESET         = chalk.white();
 var COLOR_CODES_REGEXP  = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
 
+
+
+
+/*eslint-disable no-octal*/
 if(! isStrictMode() ) {
-  COLOR_ORANGE          = "\033[38;5;214m";
-  COLOR_RESET           = "\033[m";
+  COLOR_ORANGE          = '\033[38;5;214m';
+  COLOR_RESET           = '\033[m';
 }
+/*eslint-enable */
 
 function isStrictMode() {
   return (typeof this === 'undefined');

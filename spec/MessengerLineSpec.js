@@ -11,7 +11,7 @@ var expect = require('chai').expect;
 var chalk  = require('chalk');
 
 describe('Messenger Line Test', function (done) {
-  it('should test .line method with .color function', function(){
+  it('should test .line method with .color function', function (){
 
     msg.chalkline.red();
     msg.chalkline.green();
@@ -22,4 +22,3 @@ describe('Messenger Line Test', function (done) {
 
   });
 });
-

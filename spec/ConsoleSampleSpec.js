@@ -8,9 +8,9 @@ var kids   = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
 var user   = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
 
-describe('Test Enhanced Formatting', function(done) {
+describe('Test Enhanced Formatting', function (done) {
 
-	it('should contain a header and some additional messages',function(done){
+	it('should contain a header and some additional messages',function (done){
 
 		console.header('This is the header message');
 		console.log('Here is first logged message');

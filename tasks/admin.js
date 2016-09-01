@@ -15,7 +15,7 @@ var msg     = require('../index');
 // miscellaneous admin tasks for operations like clearing logs (build)
 
 // prepare for deployment
-gulp.task('clean', function(){
+gulp.task('clean', function (){
 	return gulp.src(config.clean.src, {read: false})
 		.pipe(clean())
 		.pipe(msg.flush.success('*** Ready For Deployment ***'));
