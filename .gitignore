@@ -1,7 +1,6 @@
 .idea/
 .idea/workspace.xml
 node_modules
-gulpfile.js
 TODO.md
 todo.json
 /tasks/_disabled
@@ -10,4 +9,3 @@ todo.json
 .editorconfig
 .jslintrc
 /spec/logs/
-
