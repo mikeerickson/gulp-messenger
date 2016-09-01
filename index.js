@@ -17,16 +17,14 @@ var chalkline    = require('./lib/chalkline');
 var Purdy        = require('purdy');
 var bowser       = require('bowser');
 var sprintf      = require("sprintf-js").sprintf;
+var _            = require('lodash');
+_.mixin(require('lodash-deep'));
 
 var winston      = null;
 
 if(bowser.name.length === 0) {
   var winston      = require('winston');
 }
-
-var _            = require('lodash');
-
-_.mixin(require('lodash-deep'));
 
 // MODULE CONSTANTS
 // =============================================================================
