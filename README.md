@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/mikeerickson/gulp-messenger.svg?branch=master)](https://travis-ci.org/mikeerickson/gulp-messenger) [![Dependency Status](https://gemnasium.com/mikeerickson/gulp-messenger.svg)](https://gemnasium.com/mikeerickson/gulp-messenger) [![npm](https://img.shields.io/npm/dm/localeval.svg)]() [![npm](https://img.shields.io/badge/mocha-passed-green.svg)]()
 
-
+View on [npm](https://www.npmjs.com/package/gulp-messenger)
 
 
 ### Install with [npm](npmjs.org)
@@ -58,30 +58,30 @@ var defOptions = {
     logFile:            'app.log',
     timestamp:          false,
     rotateLog:          false,
-    boldVariables:      true, 
+    boldVariables:      true,
     useDumpForObjects:  true
 };
 
 logToFile (default: false)
-- will log the supplied message to `logger` instance and log to file 
+- will log the supplied message to `logger` instance and log to file
 
 logToConsole (default: true)
-- will log message to console 
+- will log message to console
 
 logTimestampFormat (default: YYYY-MM-DD HH:mm:ss Z)
 - when logging to file, uses momentjs formats
 
 logPath (default: 'logs/' at root level)
-- desired path where log files will be stored 
+- desired path where log files will be stored
 
 logFile (default: 'app.log')
-- desired filename where log files will be stored 
+- desired filename where log files will be stored
 
 timestamp (default: false)
-- Will include timestamp on consoled messages 
+- Will include timestamp on consoled messages
 
 rotateLog (default: false)
-- will create a new log file each day 
+- will create a new log file each day
 
 boldVariables (default: true)
 - when perform interpolation, the actual variable will be bold
@@ -103,8 +103,8 @@ msg.info('This information message logged to console and optionally log file.  C
 
 or -
 
-// If you using in gulp stream, include the `flush` property as shown here  
-// All messenger routines (except dump) are supported in the gulp pipleline  
+// If you using in gulp stream, include the `flush` property as shown here
+// All messenger routines (except dump) are supported in the gulp pipleline
 gulp.src('src/**/*')
     .pipe(msg.flush.info('Piping Message'));  // 'Piping Message' for each file
 ```
@@ -122,7 +122,7 @@ Use `msg.Info` from the outside of the stream
 msg.Info('Application Message'); //'Application Message' in node.js application
 ```
 
-### msg.version|msg.Version 
+### msg.version|msg.Version
 
 Returns current module version
 
