@@ -7,7 +7,6 @@ var chalk   = require('chalk');
 var kids   = ['Joelle', 'Brady', 'Bailey', 'Trevor'];
 var user   = {fname: 'Mike', lname: 'Erickson', kids: kids.join(', ')};
 
-
 describe('Test Enhanced Formatting', function (done) {
 
 	it('should contain a header and some additional messages',function (done){

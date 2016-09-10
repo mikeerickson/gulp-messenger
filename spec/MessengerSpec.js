@@ -1,9 +1,3 @@
-/*jshint node:true */
-/*jslint node:true */
-/*global require */
-/*global describe */
-/*global it */
-
 'use strict';
 
 var msg    = require('../index');

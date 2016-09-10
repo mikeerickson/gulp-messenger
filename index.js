@@ -37,7 +37,7 @@ var COLOR_CODES_REGEXP  = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)
 
 
 
-/*eslint-disable no-octal*/
+/*eslint-disable */
 if(! isStrictMode() ) {
   COLOR_ORANGE          = '\033[38;5;214m';
   COLOR_RESET           = '\033[m';
