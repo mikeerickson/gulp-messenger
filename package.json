@@ -73,7 +73,7 @@
     "mochawesome": "1.5.2",
     "path-exists": "^3.0.0",
     "phantomjs": "2.1.7",
-    "require-dir": "^0.3.0",
+    "require-dir": "^0.3.1",
     "should": "11.1.0",
     "sinon": "1.17.5"
   },
