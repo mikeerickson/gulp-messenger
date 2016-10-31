@@ -49,7 +49,7 @@
     "winston": "2.2.0"
   },
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 4"
   },
   "bugs": {
     "url": "https://github.com/mikeerickson/gulp-messenger/issues"
