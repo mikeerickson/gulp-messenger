@@ -35,7 +35,7 @@
     "defaults": "1.0.3",
     "detect-node": "^2.0.3",
     "gulp": "3.9.1",
-    "install": "0.8.1",
+    "install": "0.8.2",
     "is_js": "0.8.0",
     "lodash": "3.10.1",
     "lodash-deep": "1.6.0",
