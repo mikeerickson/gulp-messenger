@@ -46,7 +46,7 @@
     "purdy": "2.2.0",
     "sprintf-js": "1.0.3",
     "through2": "2.0.1",
-    "winston": "2.2.0"
+    "winston": "2.3.0"
   },
   "engines": {
     "node": ">= 0.10"
