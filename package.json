@@ -74,7 +74,7 @@
     "path-exists": "^3.0.0",
     "phantomjs": "2.1.7",
     "require-dir": "^0.3.0",
-    "should": "11.1.0",
+    "should": "11.1.1",
     "sinon": "1.17.5"
   },
   "scripts": {
