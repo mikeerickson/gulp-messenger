@@ -67,7 +67,7 @@
     "gulp-todo": "5.0.0",
     "install": "^0.8.1",
     "jshint-summary": "0.4.0",
-    "lodash": "4.15.0",
+    "lodash": "4.16.4",
     "mocha": "^3.0.2",
     "mocha-sinon": "1.1.6",
     "mochawesome": "1.5.2",
