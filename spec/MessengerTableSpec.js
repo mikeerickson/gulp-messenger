@@ -1,15 +1,15 @@
 'use strict';
 
-let msg    = require('../index');
-let expect = require('chai').expect;
-let sinon  = require('sinon');
+var msg    = require('../index');
+var expect = require('chai').expect;
+var sinon  = require('sinon');
 
 require('mocha-sinon');
 
 describe('Messenger Table Test', function (done) {
 
-  let data = {};
-  let table;
+  var data = {};
+  var table;
   beforeEach(function () {
     data = {
       fname: 'Mike',
