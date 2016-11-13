@@ -2,7 +2,7 @@
   "name": "gulp-messenger",
   "description": "Console/Gulp and File Logger",
   "main": "index.js",
-  "version": "0.25.2",
+  "version": "0.25.3",
   "reveal": true,
   "repository": {
     "type": "git",
@@ -86,7 +86,8 @@
     "all": "npm run eslint && npm run test",
     "test": "mocha spec",
     "eslint": "eslint \"./**/*.js\" --config .eslintrc.yml || true",
-    "lint": "npm run eslint"
+    "lint": "npm run eslint",
+    "todo": "gulp todo"
   },
   "maintainers": [
     {
