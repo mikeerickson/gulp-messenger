@@ -2,7 +2,7 @@
   "name": "gulp-messenger",
   "description": "Console/Gulp and File Logger",
   "main": "index.js",
-  "version": "0.25.0",
+  "version": "0.25.1",
   "reveal": true,
   "repository": {
     "type": "git",
