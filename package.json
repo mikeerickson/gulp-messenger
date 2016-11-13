@@ -22,8 +22,12 @@
     }
   },
   "keywords": [
+    "gulp",
+    "cli",
+    "node",
     "gulpplugin",
     "notification",
+    "plugin",
     "console",
     "log",
     "logger",
