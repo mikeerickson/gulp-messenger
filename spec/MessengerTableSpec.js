@@ -1,8 +1,8 @@
 'use strict';
 
-const msg    = require('../index');
-const expect = require('chai').expect;
-const sinon  = require('sinon');
+let msg    = require('../index');
+let expect = require('chai').expect;
+let sinon  = require('sinon');
 
 require('mocha-sinon');
 
