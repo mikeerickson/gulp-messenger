@@ -5,9 +5,13 @@
 
 ## Changelog
 
+- 0.25.0
+  - added .table method (output object in table)
+  - uses `easyTable`
+  
 - 0.24.0
   - lots of little changes :-)
-  
+
 - 0.19.0
   - Added `version` method
   - Added `name` method

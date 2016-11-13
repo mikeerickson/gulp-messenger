@@ -14,6 +14,7 @@ var path         = require("path");
 var prettyHrtime = require('pretty-hrtime');
 var through      = require('through2');
 var chalkline    = require('./lib/chalkline');
+var Table        = require('easy-table');
 var Purdy        = require('purdy');
 var bowser       = require('bowser');
 var sprintf      = require("sprintf-js").sprintf;
@@ -100,6 +101,7 @@ var messenger = {
   warn:       new Message('warning'),
   error:      new Message('error'),
   note:       new Message('note'),
+  table:      new Message('table'),
   time:       new Message('time'),
   debug:      new Message('debug'),
   line:       new Message('line'),
@@ -127,6 +129,7 @@ var messenger = {
     warn:    message('warning', true),
     error:   message('error', true),
     note:    message('note', true),
+    table:   message('table', true),
     time:    message('time', true),
     debug:   message('debug', true),
     line:    message('line', true),
@@ -153,6 +156,7 @@ var messenger = {
   Debug:      new Message('debug'),
   Line:       new Message('line'),
   Header:     new Message('header'),
+  Table:      new Message('table'),
   Purdy:     function() {
     Purdy.apply(Purdy, arguments);
   },
@@ -221,7 +225,12 @@ function Message(style) {
     var args = getArgs(arguments);
     if((is.object(args.message)) && (arguments.length === 1) && (defOptions.useDumpForObjects)) {
       /* jshint -W064 */
-      Purdy(args.message);
+      if(style === 'table') {
+        console.log(Table.print(args.message));
+      }
+      else {
+        Purdy(args.message);
+      }
     } else {
       notify(style, args.before, args.message, args.after, args.data);
     }
@@ -287,6 +296,8 @@ function init(options) {
 
 function notify(style, before, message, after, data) {
 
+debugger;
+
   var text, variable;
   var result = '';
   var tokens;
@@ -324,6 +335,9 @@ function notify(style, before, message, after, data) {
       text     = COLOR_ORANGE;
       variable = chalk.white;
       break;
+    case "table":
+      text     = chalk.white;
+      variable = chalk.white;
     case "time":
       text     = chalk.magenta;
       variable = chalk.magenta.bold;
@@ -462,6 +476,8 @@ function notify(style, before, message, after, data) {
         case 'log':
         case 'default':
           logger.info(msg); break;
+        case 'table':
+          return false;
       }
     }
 

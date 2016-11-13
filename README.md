@@ -38,6 +38,7 @@ msg.Error  ('style: <%= name %>', {name: 'error'});    // default color Red
 msg.Note   ('style: <%= name %>', {name: 'note'});     // default color Orange
 msg.Time   ('style: <%= name %>', {name: 'time'});
 msg.Debug  ('style: <%= name %>', {name: 'debug'});
+msg.Table  (array|object)
 ```
 
 
@@ -174,7 +175,7 @@ msg.Info('Environment: <%= env.NODE_ENV %>. Name: <%= name %>', {name: 'codedung
 
 ### License
 
-Copyright (c) 2015 Mike Erickson
+Copyright (c) 2015-2016 Mike Erickson
 Released under the MIT license
 
 

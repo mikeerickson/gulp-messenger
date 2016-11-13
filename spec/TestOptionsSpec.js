@@ -1,5 +1,7 @@
 var msg        = require('../index');
 var expect     = require('chai').expect;
+require('mocha-sinon');
+
 
 var defMsgOpts = {
   lineLenght: 40,
@@ -8,11 +10,9 @@ var defMsgOpts = {
   logFile:    'testOptions.log'
 };
 
-require('mocha-sinon');
-
 describe('test `setOptions` method', function () {
   beforeEach(function () {
-    var log = msg.log;
+    const log = msg.log;
     this.sinon.stub(msg, 'log', function () {
       return log.apply(log, arguments);
     });
