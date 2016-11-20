@@ -76,7 +76,7 @@
     "jshint-summary": "0.4.0",
     "mocha": "3.1.2",
     "mocha-sinon": "1.1.6",
-    "mochawesome": "1.5.3",
+    "mochawesome": "1.5.4",
     "path-exists": "3.0.0",
     "purdy": "2.2.0",
     "require-dir": "0.3.1",
