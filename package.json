@@ -80,7 +80,7 @@
     "path-exists": "3.0.0",
     "purdy": "2.2.0",
     "require-dir": "0.3.1",
-    "sinon": "1.17.6"
+    "sinon": "1.17.7"
   },
   "scripts": {
     "all": "npm run eslint && npm run test",
