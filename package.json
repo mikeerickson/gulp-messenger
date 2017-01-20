@@ -35,8 +35,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "ansi-styles": "2.2.1",
-    "bowser": "1.5.0",
+    "ansi-styles": "3.0.0",
+    "bowser": "1.6.0",
     "chalk": "1.1.3",
     "defaults": "1.0.3",
     "detect-node": "^2.0.3",
@@ -46,13 +46,13 @@
     "lodash": "3.10.1",
     "lodash-deep": "1.6.0",
     "mkdirp": "^0.5.1",
-    "moment": "2.16.0",
+    "moment": "2.17.1",
     "path-exists": "3.0.0",
     "pretty-hrtime": "1.0.3",
     "purdy": "2.2.0",
     "sprintf-js": "1.0.3",
-    "through2": "2.0.1",
-    "winston": "2.3.0"
+    "through2": "2.0.3",
+    "winston": "2.3.1"
   },
   "engines": {
     "node": ">= 4.4"
@@ -62,7 +62,6 @@
   },
   "homepage": "https://github.com/mikeerickson/gulp-messenger",
   "devDependencies": {
-    "bowser": "1.4.5",
     "chai": "3.5.0",
     "escape-string-regexp": "1.0.5",
     "gulp": "3.9.1",
@@ -72,15 +71,14 @@
     "gulp-notify": "2.2.0",
     "gulp-rimraf": "0.2.1",
     "gulp-run": "1.7.1",
-    "gulp-todo": "5.1.0",
+    "gulp-todo": "5.2.0",
     "jshint-summary": "0.4.0",
-    "mocha": "3.1.2",
+    "mocha": "3.2.0",
     "mocha-sinon": "1.1.6",
-    "mochawesome": "1.5.3",
+    "mochawesome": "2.0.2",
     "path-exists": "3.0.0",
-    "purdy": "2.2.0",
     "require-dir": "0.3.1",
-    "sinon": "1.17.6"
+    "sinon": "1.17.7"
   },
   "scripts": {
     "all": "npm run eslint && npm run test",
