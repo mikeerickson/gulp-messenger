@@ -1,0 +1,174 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/mikee/.nvm/versions/node/v6.8.1/bin/node',
+1 verbose cli   '/Users/mikee/.nvm/versions/node/v6.8.1/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@4.0.3
+3 info using node@v6.8.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/mikee/Documents/Projects/dev/gulp-plugins/gulp-messenger',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/mikee/.npm/gulp-messenger/0.26.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/mikee/.npm correctMkdir not in flight; initializing
+10 info lifecycle gulp-messenger@0.26.0~prepublish: gulp-messenger@0.26.0
+11 silly lifecycle gulp-messenger@0.26.0~prepublish: no script for prepublish, continuing
+12 info lifecycle gulp-messenger@0.26.0~prepare: gulp-messenger@0.26.0
+13 silly lifecycle gulp-messenger@0.26.0~prepare: no script for prepare, continuing
+14 verbose tar pack [ '/Users/mikee/.npm/gulp-messenger/0.26.0/package.tgz',
+14 verbose tar pack   '/Users/mikee/Documents/Projects/dev/gulp-plugins/gulp-messenger' ]
+15 verbose tarball /Users/mikee/.npm/gulp-messenger/0.26.0/package.tgz
+16 verbose folder /Users/mikee/Documents/Projects/dev/gulp-plugins/gulp-messenger
+17 verbose addLocalTarball adding from inside cache /Users/mikee/.npm/gulp-messenger/0.26.0/package.tgz
+18 verbose correctMkdir /Users/mikee/.npm correctMkdir not in flight; initializing
+19 silly cache afterAdd gulp-messenger@0.26.0
+20 verbose afterAdd /Users/mikee/.npm/gulp-messenger/0.26.0/package/package.json not in flight; writing
+21 verbose correctMkdir /Users/mikee/.npm correctMkdir not in flight; initializing
+22 verbose afterAdd /Users/mikee/.npm/gulp-messenger/0.26.0/package/package.json written
+23 silly publish { name: 'gulp-messenger',
+23 silly publish   description: 'Console/Gulp and File Logger',
+23 silly publish   main: 'index.js',
+23 silly publish   version: '0.26.0',
+23 silly publish   reveal: true,
+23 silly publish   repository:
+23 silly publish    { type: 'git',
+23 silly publish      url: 'git+https://github.com/mikeerickson/gulp-messenger.git' },
+23 silly publish   author: { name: 'codedungeon', email: 'codedungeon@gmail.com' },
+23 silly publish   eslintConfig:
+23 silly publish    { globals:
+23 silly publish       { window: false,
+23 silly publish         require: true,
+23 silly publish         process: true,
+23 silly publish         describe: true,
+23 silly publish         it: true } },
+23 silly publish   keywords:
+23 silly publish    [ 'gulp',
+23 silly publish      'cli',
+23 silly publish      'node',
+23 silly publish      'gulpplugin',
+23 silly publish      'notification',
+23 silly publish      'plugin',
+23 silly publish      'console',
+23 silly publish      'log',
+23 silly publish      'logger',
+23 silly publish      'express' ],
+23 silly publish   license: 'MIT',
+23 silly publish   dependencies:
+23 silly publish    { 'ansi-styles': '3.0.0',
+23 silly publish      bowser: '1.6.0',
+23 silly publish      chalk: '1.1.3',
+23 silly publish      defaults: '1.0.3',
+23 silly publish      'detect-node': '^2.0.3',
+23 silly publish      'easy-table': '1.0.0',
+23 silly publish      gulp: '3.9.1',
+23 silly publish      is_js: '0.9.0',
+23 silly publish      lodash: '3.10.1',
+23 silly publish      'lodash-deep': '1.6.0',
+23 silly publish      mkdirp: '^0.5.1',
+23 silly publish      moment: '2.17.1',
+23 silly publish      'path-exists': '3.0.0',
+23 silly publish      'pretty-hrtime': '1.0.3',
+23 silly publish      purdy: '2.2.0',
+23 silly publish      'sprintf-js': '1.0.3',
+23 silly publish      through2: '2.0.3',
+23 silly publish      winston: '2.3.1' },
+23 silly publish   bugs: { url: 'https://github.com/mikeerickson/gulp-messenger/issues' },
+23 silly publish   homepage: 'https://github.com/mikeerickson/gulp-messenger',
+23 silly publish   devDependencies:
+23 silly publish    { chai: '3.5.0',
+23 silly publish      'escape-string-regexp': '1.0.5',
+23 silly publish      gulp: '3.9.1',
+23 silly publish      'gulp-clean': '^0.3.1',
+23 silly publish      'gulp-ignore': '2.0.2',
+23 silly publish      'gulp-mocha': '3.0.1',
+23 silly publish      'gulp-notify': '3.0.0',
+23 silly publish      'gulp-rimraf': '0.2.1',
+23 silly publish      'gulp-run': '1.7.1',
+23 silly publish      'gulp-todo': '5.2.0',
+23 silly publish      'jshint-summary': '0.4.0',
+23 silly publish      mocha: '3.2.0',
+23 silly publish      'mocha-sinon': '1.1.6',
+23 silly publish      mochawesome: '2.0.2',
+23 silly publish      'path-exists': '3.0.0',
+23 silly publish      'require-dir': '0.3.1',
+23 silly publish      sinon: '1.17.7' },
+23 silly publish   scripts:
+23 silly publish    { all: 'npm run eslint && npm run test',
+23 silly publish      test: 'mocha spec',
+23 silly publish      eslint: 'eslint "./**/*.js" --config .eslintrc.yml || true',
+23 silly publish      lint: 'npm run eslint',
+23 silly publish      todo: 'gulp todo' },
+23 silly publish   maintainers: [ { name: 'codedungeon', email: 'codedungeon@gmail.com' } ],
+23 silly publish   readme: '# gulp-messenger\n### gulp plugin for browser, command line notification and logging!\n\n[![Build Status](https://travis-ci.org/mikeerickson/gulp-messenger.svg?branch=master)](https://travis-ci.org/mikeerickson/gulp-messenger) [![Dependency Status](https://gemnasium.com/mikeerickson/gulp-messenger.svg)](https://gemnasium.com/mikeerickson/gulp-messenger) [![npm](https://img.shields.io/npm/dm/localeval.svg)]() [![npm](https://img.shields.io/badge/mocha-passed-green.svg)]()\n\nView on [npm](https://www.npmjs.com/package/gulp-messenger)\n\n\n### Install with [npm](npmjs.org)\n\n```sh\nnpm install gulp-messenger\n```\n\n### Usage\n\n```js\nvar msg = require(\'gulp-messenger\');\n\nmsg.init(); // initialize module, otherwise defaults will be used\n\n// this example will enable file logging (see options below)\nmsg.init({logToFile: true});\n\n\n// this will disable logging to file and interpolation variables will be font style as message (no bold)\nvar options = { logToFile: false, boldVariables: false };\nmsg.init(options);\n\n\n// You can use titleCase or lower case for msg methods\nmsg.Info(\'-\', \'Loading...\', \'*\');\nmsg.log    (\'style: <%= name %>\', {name: \'info\'});     // default color White\nmsg.Info   (\'style: <%= name %>\', {name: \'info\'});     // default color Cyan\nmsg.Success(\'style: <%= name %>\', {name: \'success\'});  // default color Green\nmsg.Warning(\'style: <%= name %>\', {name: \'warning\'});  // default color Yellow\nmsg.Error  (\'style: <%= name %>\', {name: \'error\'});    // default color Red\nmsg.Note   (\'style: <%= name %>\', {name: \'note\'});     // default color Orange\nmsg.Time   (\'style: <%= name %>\', {name: \'time\'});\nmsg.Debug  (\'style: <%= name %>\', {name: \'debug\'});\nmsg.Table  (array|object)\n```\n\n\n### API\n#### info/Info, success/Success, warning/Warning, error/Error, note/Note, time/Time, debug/Debug, line/Line\n\n- lowercase methods are to be used in gulp pipeline or outside (same API can be used for both Node, Browser, and Gulp)\n- Titlecase methods are to be used outside of gulp (ie Node or browser)\n\nDefault Options (supplied to `init` method)\n\n```js\nvar defOptions = {\n    logToFile:          false,\n    logTimestampFormat: \'YYYY-MM-DD HH:mm:ss Z\',\n    logToConsole:       true,\n    logPath:            \'logs/\',\n    logFile:            \'app.log\',\n    timestamp:          false,\n    rotateLog:          false,\n    boldVariables:      true,\n    useDumpForObjects:  true\n};\n\nlogToFile (default: false)\n- will log the supplied message to `logger` instance and log to file\n\nlogToConsole (default: true)\n- will log message to console\n\nlogTimestampFormat (default: YYYY-MM-DD HH:mm:ss Z)\n- when logging to file, uses momentjs formats\n\nlogPath (default: \'logs/\' at root level)\n- desired path where log files will be stored\n\nlogFile (default: \'app.log\')\n- desired filename where log files will be stored\n\ntimestamp (default: false)\n- Will include timestamp on consoled messages\n\nrotateLog (default: false)\n- will create a new log file each day\n\nboldVariables (default: true)\n- when perform interpolation, the actual variable will be bold\n\nuseDumpForObjects (default: true)\n- when enabled, is passing a single object paramter, msg.dump() will be used instead of standard console output\n- when disabled, native msg.xxx will be used (default colors, etc)\n\n\n```\n\nFor example `info`\nUse `msg.info` for each file into the stream\n\n```js\n\nmsg.Info(\'This information message logged to console and optionally log file.  Configured by `options` parameter supplied to `msg.init` method\');\nmsg.info(\'This information message logged to console and optionally log file.  Configured by `options` parameter supplied to `msg.init` method\');\n\nor -\n\n// If you using in gulp stream, include the `flush` property as shown here\n// All messenger routines (except dump) are supported in the gulp pipleline\ngulp.src(\'src/**/*\')\n    .pipe(msg.flush.info(\'Piping Message\'));  // \'Piping Message\' for each file\n```\n\nUse `msg.flush.info` at the and of the stream\n\n```js\ngulp.src(\'src/**/*\')\n    .pipe(msg.flush.info(\'Process Completed Successfully\')); //\'Process Completed Successfully\' at the and of stream\n```\n\nUse `msg.Info` from the outside of the stream\n\n```js\nmsg.Info(\'Application Message\'); //\'Application Message\' in node.js application\n```\n\n### msg.version|msg.Version\n\nReturns current module version\n\n### msg.Info([before,] message, [after,] [data])\n\nShow message\n\n#### Parameters\n\n##### before\n##### after\nType: `String`\n\nDelimiter before/after the message. Each character is repeated 80 times\n\n#### Usage\n\n```js\nmsg.Info(\'--\', \'Hello World\', \'*\')\n```\n\n##### data\nType: `Object`\n\nData for message. Inherited values:\n\n<pre>\nenv           - process.env\nfile          - vinyl file\nfile.relative - relative path (extra field)\nfile.basename - basename (extra field)\nduration      - duration of streaming\ntotalDuration - duration from gulpfile start\n</pre>\n\n\n##### message\nType: `String`\n\nLodash compatible template (may also use Underscore over Lodash).\n\n#### Usage\n\n```js\nmsg.Info(\'Environment: <%= env.NODE_ENV %>. Name: <%= name %>\', {name: \'codedungeon\'})\n//Environment: dev. name: codedungeon\n```\n\n\n### License\n\nCopyright (c) 2015-2016 Mike Erickson\nReleased under the MIT license\n\n\n### Credits\n\ngulp-messenger written by Mike Erickson\n\nE-Mail: [codedungeon@gmail.com](mailto:codedungeon@gmail.com)\n\nTwitter: [@codedungeon](http://twitter.com/codedungeon)\n\nWebiste: [codedungeon.org](http://codedungeon.org)\n\n***\n',
+23 silly publish   readmeFilename: 'README.md',
+23 silly publish   gitHead: '8d7d6522aabdbd24d1db5ddd9c14756ed888981c',
+23 silly publish   _id: 'gulp-messenger@0.26.0',
+23 silly publish   _shasum: 'e0582fd03e969a2b7c2fbd88fecfc96dfdc724ef',
+23 silly publish   _from: '.' }
+24 info lifecycle gulp-messenger@0.26.0~prepublishOnly: gulp-messenger@0.26.0
+25 silly lifecycle gulp-messenger@0.26.0~prepublishOnly: no script for prepublishOnly, continuing
+26 verbose getPublishConfig undefined
+27 silly mapToRegistry name gulp-messenger
+28 silly mapToRegistry using default registry
+29 silly mapToRegistry registry https://registry.npmjs.org/
+30 silly mapToRegistry data Result {
+30 silly mapToRegistry   raw: 'gulp-messenger',
+30 silly mapToRegistry   scope: null,
+30 silly mapToRegistry   escapedName: 'gulp-messenger',
+30 silly mapToRegistry   name: 'gulp-messenger',
+30 silly mapToRegistry   rawSpec: '',
+30 silly mapToRegistry   spec: 'latest',
+30 silly mapToRegistry   type: 'tag' }
+31 silly mapToRegistry uri https://registry.npmjs.org/gulp-messenger
+32 verbose publish registryBase https://registry.npmjs.org/
+33 silly publish uploading /Users/mikee/.npm/gulp-messenger/0.26.0/package.tgz
+34 verbose request uri https://registry.npmjs.org/gulp-messenger
+35 verbose request sending authorization for write operation
+36 info attempt registry request try #1 at 10:38:17 AM
+37 verbose request using bearer token for auth
+38 verbose request id b7fcf62219f3b174
+39 http request PUT https://registry.npmjs.org/gulp-messenger
+40 http 403 https://registry.npmjs.org/gulp-messenger
+41 verbose headers { 'content-type': 'application/json',
+41 verbose headers   'cache-control': 'max-age=300',
+41 verbose headers   'content-length': '96',
+41 verbose headers   'accept-ranges': 'bytes',
+41 verbose headers   date: 'Sat, 28 Jan 2017 18:38:17 GMT',
+41 verbose headers   via: '1.1 varnish',
+41 verbose headers   connection: 'keep-alive',
+41 verbose headers   'x-served-by': 'cache-lax8647-LAX',
+41 verbose headers   'x-cache': 'MISS',
+41 verbose headers   'x-cache-hits': '0',
+41 verbose headers   'x-timer': 'S1485628697.298141,VS0,VE231',
+41 verbose headers   vary: 'Accept-Encoding' }
+42 verbose request invalidating /Users/mikee/.npm/registry.npmjs.org/gulp-messenger on PUT
+43 error publish Failed PUT 403
+44 verbose stack Error: "You cannot publish over the previously published version 0.26.0." : gulp-messenger
+44 verbose stack     at makeError (/Users/mikee/.nvm/versions/node/v6.8.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+44 verbose stack     at CachingRegistryClient.<anonymous> (/Users/mikee/.nvm/versions/node/v6.8.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+44 verbose stack     at Request._callback (/Users/mikee/.nvm/versions/node/v6.8.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+44 verbose stack     at Request.self.callback (/Users/mikee/.nvm/versions/node/v6.8.1/lib/node_modules/npm/node_modules/request/request.js:186:22)
+44 verbose stack     at emitTwo (events.js:106:13)
+44 verbose stack     at Request.emit (events.js:191:7)
+44 verbose stack     at Request.<anonymous> (/Users/mikee/.nvm/versions/node/v6.8.1/lib/node_modules/npm/node_modules/request/request.js:1081:10)
+44 verbose stack     at emitOne (events.js:96:13)
+44 verbose stack     at Request.emit (events.js:188:7)
+44 verbose stack     at IncomingMessage.<anonymous> (/Users/mikee/.nvm/versions/node/v6.8.1/lib/node_modules/npm/node_modules/request/request.js:1001:12)
+45 verbose statusCode 403
+46 verbose pkgid gulp-messenger
+47 verbose cwd /Users/mikee/Documents/Projects/dev/gulp-plugins/gulp-messenger
+48 error Darwin 16.3.0
+49 error argv "/Users/mikee/.nvm/versions/node/v6.8.1/bin/node" "/Users/mikee/.nvm/versions/node/v6.8.1/bin/npm" "publish"
+50 error node v6.8.1
+51 error npm  v4.0.3
+52 error code E403
+53 error "You cannot publish over the previously published version 0.26.0." : gulp-messenger
+54 error If you need help, you may report this error at:
+54 error     <https://github.com/npm/npm/issues>
+55 verbose exit [ 1, true ]
