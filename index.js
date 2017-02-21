@@ -296,16 +296,12 @@ function init(options) {
 
 function notify(style, before, message, after, data) {
 
-debugger;
-
   var text, variable;
   var result = '';
   var tokens;
 
   // 2015.05.28 - added bounds check, exposed when adding *.line() routine
   if( is.undefined(message) ) { message = ''; }
-
-  debugger;
 
   if ( (is.not.object(message)) && (is.not.number(message)) ) {
     tokens = message.split(VALUE_REGEXP);
