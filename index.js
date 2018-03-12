@@ -15,7 +15,6 @@ var moment       = require('moment');
 var path         = require("path");
 var prettyHrtime = require('pretty-hrtime');
 var through      = require('through2');
-var chalkline    = require('./lib/chalkline');
 var Table        = require('easy-table');
 var Purdy        = require('purdy');
 var bowser       = require('bowser');
@@ -71,7 +70,7 @@ var defOptions = {
 
 // unicode blocks -- http://graphemica.com/blocks/block-elements
 // SETUP CHALKLINE
-chalkline.options({block: defOptions.chalklineBox});
+// chalkline.options({block: defOptions.chalklineBox});
 
 
 // SETUP WINSTON
@@ -120,7 +119,7 @@ var messenger = {
   version:    function() {
     return VERSION;
   },
-  chalkline:  chalkline,
+  chalkline:  false,
   chalk:      chalk,
   colors:     chalk,
   flush: {
@@ -136,7 +135,7 @@ var messenger = {
     debug:   message('debug', true),
     line:    message('line', true),
     header:  message('header',true),
-    chalkline: chalkline,
+    chalkline: false,
     dir: function() {
       Purdy.apply(Purdy, arguments);
     },
@@ -292,7 +291,7 @@ function init(options) {
     defOptions.logInitialized = true;
 
     // update chalkine in the event supplied block or length
-    chalkline.options({block: defOptions.chalklineBox});
+    // chalkline.options({block: defOptions.chalklineBox});
 
   };
 }

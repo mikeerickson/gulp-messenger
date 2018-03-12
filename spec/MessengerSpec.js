@@ -138,17 +138,6 @@ describe('Test Using Console Override', function (done) {
 msg
   });
 
-  it('should draw solid lines using .chalkline method and .xxx colors', function (done) {
-    msg.chalkline.red();
-    msg.chalkline.green();
-    msg.chalkline.blue();
-    msg.chalkline.yellow();
-    msg.chalkline.magenta();
-    msg.chalkline.white();
-
-    done();
-  });
-
   it('should display dump', function (done) {
     var family = {
       fname: 'Mike',
