@@ -5,6 +5,9 @@
 
 ## Changelog
 
+- 0.28.0
+  - Add check when create `logs/` directory to only create when `logToFile` is enabled
+  
 - 0.25.0
   - added .table method (output object in table)
   - uses `easyTable`
