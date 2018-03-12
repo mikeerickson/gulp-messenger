@@ -261,7 +261,7 @@ function init(options) {
 
     if(! isBrowser) {
       // create log path if it doesn't already exist, only create if we have enabled fileLogging
-      if (defOptions.logToConsole)
+      if (defOptions.logToFile)
         mkdirp(defOptions.logPath);
 
       defOptions.logFilename = defOptions.logPath + defOptions.logFile;
