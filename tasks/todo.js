@@ -8,7 +8,6 @@ var todo     = require('gulp-todo');
 var msg      = require('../index');
 
 msg.init({timestamp: true, logToFile: false});
-msg.chalkline.yellow();
 
 gulp.task('todo', function () {
 	return gulp.src(config.todo.src)

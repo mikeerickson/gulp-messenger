@@ -36,9 +36,6 @@ var COLOR_ORANGE        = chalk.red();
 var COLOR_RESET         = chalk.white();
 var COLOR_CODES_REGEXP  = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
 
-
-
-
 /*eslint-disable */
 if(! isStrictMode() ) {
   COLOR_ORANGE          = '\033[38;5;214m';
